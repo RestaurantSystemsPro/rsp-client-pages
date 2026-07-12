@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wally's Pizza &amp; Sports Bar — Owner Status</title>
+<style>
+  :root{
+    --surface-1:#fcfcfb; --page:#f9f9f7;
+    --ink-1:#0b0b0b; --ink-2:#52514e; --ink-3:#898781;
+    --grid:#e1e0d9; --baseline:#c3c2b7; --ring:rgba(11,11,11,.10);
+    --s1:#2a78d6; --s2:#1baf7a; --s3:#eda100;
+    --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --critical:#d03b3b;
+    --good-wash:rgba(12,163,12,.12); --serious-wash:rgba(236,131,90,.16); --critical-wash:rgba(208,59,59,.14);
+    --delta-good:#006300;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --surface-1:#1a1a19; --page:#0d0d0d;
+      --ink-1:#ffffff; --ink-2:#c3c2b7; --ink-3:#898781;
+      --grid:#2c2c2a; --baseline:#383835; --ring:rgba(255,255,255,.10);
+      --s1:#3987e5; --s2:#199e70; --s3:#c98500;
+      --delta-good:#0ca30c;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--page);color:var(--ink-1);padding:20px;line-height:1.4}
+  .wrap{max-width:1080px;margin:0 auto}
+  header{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:6px}
+  h1{font-size:22px;font-weight:650}
+  .asof{color:var(--ink-3);font-size:13px}
+  .subtitle{color:var(--ink-2);font-size:13px;margin-bottom:18px}
+  .card{background:var(--surface-1);border:1px solid var(--ring);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+  h2{font-size:13px;font-weight:600;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px}
+  /* KPI tiles */
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px}
+  .tile{background:var(--surface-1);border:1px solid var(--ring);border-radius:12px;padding:14px 16px}
+  .tile .label{font-size:12px;color:var(--ink-2)}
+  .tile .value{font-size:26px;font-weight:600;margin:2px 0}
+  .tile .delta{font-size:12px;color:var(--ink-2)}
+  .delta.up{color:var(--delta-good);font-weight:600}
+  .delta.down{color:var(--critical);font-weight:600}
+  .hero .value{font-size:44px}
+  .statusline{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+  /* flags */
+  .flag{display:flex;gap:10px;padding:9px 10px;border-radius:8px;margin-bottom:8px;font-size:13.5px;align-items:flex-start}
+  .flag:last-child{margin-bottom:0}
+  .flag .sev{flex:0 0 auto;font-size:11px;font-weight:700;letter-spacing:.03em;padding:2px 8px;border-radius:10px;color:#fff;margin-top:1px}
+  .flag.high{background:var(--critical-wash)} .flag.high .sev{background:var(--critical)}
+  .flag.med{background:var(--serious-wash)} .flag.med .sev{background:var(--serious);color:#fff}
+  .flag.note{background:rgba(137,135,129,.10)} .flag.note .sev{background:var(--ink-3)}
+  .flag b{font-weight:650}
+  /* chart */
+  .legend{display:flex;gap:18px;font-size:12.5px;color:var(--ink-2);margin-bottom:8px;flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .key{width:12px;height:12px;border-radius:3px;display:inline-block}
+  .key.line{height:3px;border-radius:2px;width:16px}
+  svg text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+  .tooltip{position:fixed;pointer-events:none;background:var(--surface-1);border:1px solid var(--ring);box-shadow:0 4px 14px rgba(0,0,0,.18);border-radius:8px;padding:8px 11px;font-size:12.5px;color:var(--ink-1);opacity:0;transition:opacity .1s;z-index:10;max-width:240px}
+  .tooltip .t-day{font-weight:650;margin-bottom:3px}
+  .tooltip .t-row{display:flex;justify-content:space-between;gap:14px;color:var(--ink-2)}
+  .tooltip .t-row b{color:var(--ink-1);font-variant-numeric:tabular-nums}
+  /* duty grid */
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-3);font-weight:600;text-align:left;padding:6px 8px;border-bottom:1px solid var(--grid)}
+  th.c,td.c{text-align:center}
+  td{padding:5px 8px;border-bottom:1px solid var(--grid);color:var(--ink-2)}
+  tr:last-child td{border-bottom:none}
+  td.duty{color:var(--ink-1)}
+  .cell{display:inline-flex;align-items:center;justify-content:center;min-width:34px;padding:2px 7px;border-radius:6px;font-size:11px;font-weight:650}
+  .cell.ok{background:var(--good-wash);color:var(--delta-good)}
+  .cell.flag{background:var(--critical-wash);color:var(--critical)}
+  .cell.na{color:var(--ink-3)}
+  .cell.pend{color:var(--ink-3);opacity:.55}
+  /* meters */
+  .meter-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;font-size:13px}
+  .meter-row:last-child{margin-bottom:0}
+  .meter-label{flex:0 0 220px;color:var(--ink-1)}
+  .meter{flex:1;height:10px;border-radius:5px;background:rgba(42,120,214,.16);overflow:hidden;position:relative}
+  .meter .fill{height:100%;border-radius:5px}
+  .meter-days{flex:0 0 130px;text-align:right;color:var(--ink-2);font-size:12px}
+  footer{color:var(--ink-3);font-size:11.5px;margin-top:6px;text-align:center}
+  @media (max-width:720px){.meter-label{flex-basis:130px}.meter-days{flex-basis:96px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Wally's Pizza &amp; Sports Bar</h1>
+    <span class="asof">Owner status · updated through Sat, Jul 11, 2026</span>
+  </header>
+  <p class="subtitle">Silence is good news. Anything needing your attention is flagged below, with the number that broke the rule.</p>
+
+  <!-- KPI TILES -->
+  <div class="tiles">
+    <div class="tile hero">
+      <div class="label">Yesterday's sales (Sat 7/11)</div>
+      <div class="value">$15,925</div>
+      <div class="delta up">▲ 12.1% vs forecast&nbsp;&nbsp;·&nbsp;&nbsp;▲ 12.2% vs last year</div>
+    </div>
+    <div class="tile">
+      <div class="label">Week to date (Mon–Sat)</div>
+      <div class="value">$74,716</div>
+      <div class="delta up">▲ 8.1% vs forecast ($69,108)</div>
+    </div>
+    <div class="tile">
+      <div class="label">Over / short</div>
+      <div class="value">$4.00</div>
+      <div class="delta">within $20 tolerance ✓</div>
+    </div>
+    <div class="tile">
+      <div class="label">Labor (Sat)</div>
+      <div class="value">24.0%</div>
+      <div class="delta">budget 23.3% · +0.7 pts, in range</div>
+    </div>
+    <div class="tile">
+      <div class="label">Open flags</div>
+      <div class="value">3</div>
+      <div class="statusline"><span class="dot" style="background:var(--critical)"></span>1 high <span class="dot" style="background:var(--serious)"></span>2 medium</div>
+    </div>
+  </div>
+
+  <!-- FLAGS -->
+  <div class="card">
+    <h2>⚑ Flags needing attention — Sat, Jul 11</h2>
+    <div class="flag high"><span class="sev">HIGH</span><div><b>Price increase over 5%:</b> Fernet Branca (Golden Brands) $31.26 → $35.76, <b>+14.4%</b>. Check the invoice or renegotiate before the next order.</div></div>
+    <div class="flag med"><span class="sev">MEDIUM</span><div><b>Invoice contradiction:</b> no invoices entered on 7/10 or 7/11, but the manager checklist attests invoices were scanned and uploaded. The data and the attestation disagree.</div></div>
+    <div class="flag med"><span class="sev">MEDIUM</span><div><b>Daily non-negotiables marked No:</b> POs hanging, prep sheets, Daily Key Item Report, yield sheets, unpaid-invoice audit. (These were setup-test entries; managers take over from 7/12.)</div></div>
+    <div class="flag note"><span class="sev">NOTES</span><div>Pasta station found unplugged · Ovation trends: burnt bacon complaints, online ordering portal issues · Greek salad 86'd · Kudos: Cora training Julianna, Mary team player. — Emil Andy Peterson</div></div>
+  </div>
+
+  <!-- SALES CHART -->
+  <div class="card">
+    <h2>Sales this week — actual vs forecast vs last year</h2>
+    <div class="legend">
+      <span><span class="key" style="background:var(--s1)"></span>Actual</span>
+      <span><span class="key" style="background:var(--s2)"></span>Forecast</span>
+      <span><span class="key line" style="background:var(--s3)"></span>Last year (same weekday)</span>
+    </div>
+    <div id="chart"></div>
+  </div>
+
+  <!-- DUTY SCORECARD -->
+  <div class="card">
+    <h2>Duty scorecard — week of Jul 6</h2>
+    <table id="grid"></table>
+  </div>
+
+  <!-- CADENCE TIMERS -->
+  <div class="card">
+    <h2>Cadence timers — flags fire when a cycle passes without a check-off</h2>
+    <div id="meters"></div>
+  </div>
+
+  <footer>RSP Owner Alerts · audited daily at 6:00 AM from the Daily Manager Log · full history in Google Drive · alerts in #wallys-owner-alerts</footer>
+</div>
+<div class="tooltip" id="tip"></div>
+
+<script>
+(function(){
+  "use strict";
+  /* ============ DATA (updated by Claude each morning) ============ */
+  const week = {
+    days:["Mon 7/6","Tue 7/7","Wed 7/8","Thu 7/9","Fri 7/10","Sat 7/11","Sun 7/12"],
+    actual:[12521.56,9627.52,10167.77,10249.09,16225.29,15924.73,null],
+    forecast:[9056.75,8980.72,9955.34,11477.36,15428.37,14209.14,14975.63],
+    ly:[null,null,null,null,15187.15,14193.73,13233.72]
+  };
+  const duties=[
+    ["Manager log dispatched",           [null,null,null,null,null,"ok","pend"]],
+    ["EOD paperwork / sales posted",     [null,null,null,null,null,"ok","pend"]],
+    ["Over/short within $20",            [null,null,null,null,null,"ok","pend"]],
+    ["Cash proves (cash vs proof)",      [null,null,null,null,null,"ok","pend"]],
+    ["Paid outs logged w/ receipts",     [null,null,null,null,null,"ok","pend"]],
+    ["Invoices entered / price compare", [null,null,null,null,null,"flag","pend"]],
+    ["Price changes reviewed (>5%)",     [null,null,null,null,null,"flag","pend"]],
+    ["POs placed &amp; hanging",         [null,null,null,null,null,"flag","pend"]],
+    ["Labor tracked, on budget",         [null,null,null,null,null,"ok","pend"]],
+    ["Prep sheets used",                 [null,null,null,null,null,"flag","pend"]],
+    ["Pre-shift meeting held",           [null,null,null,null,null,"ok","pend"]],
+    ["Key item report",                  [null,null,null,null,null,"flag","pend"]],
+    ["Yield sheets",                     [null,null,null,null,null,"flag","pend"]],
+    ["Unpaid-invoice audit / COGS to QB",[null,null,null,null,null,"flag","pend"]],
+    ["Checklists complete (Jolt)",       [null,null,null,null,null,"ok","pend"]],
+    ["Sunday inventory",                 [null,null,null,null,null,"na","pend"]]
+  ];
+  /* days since last check-off vs allowed cycle */
+  const meters=[
+    ["Weekly training planned",1,7],
+    ["Weekly manager meeting",1,7],
+    ["$ per labor hour review",1,7,"due Thursdays"],
+    ["Restaurant walkthrough",1,14],
+    ["Equipment inspection",1,31],
+    ["End-of-month inventories",1,31],
+    ["Auto pars regenerated",1,42],
+    ["August forecast input",0,9,"due by Jul 20"]
+  ];
+
+  const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const fmt=v=>"$"+Math.round(v).toLocaleString();
+
+  /* ============ CHART (grouped bars + LY line) ============ */
+  const W=1000,H=320,padL=56,padR=14,padT=16,padB=34;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+  const maxV=18000, yMax=maxV;
+  const x=i=>padL+plotW*(i+0.5)/7;
+  const y=v=>padT+plotH*(1-v/yMax);
+  const band=plotW/7;
+  let s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto" role="img" aria-label="Daily sales: actual vs forecast vs last year">';
+  /* gridlines + ticks */
+  for(let g=0;g<=3;g++){const v=g*6000,gy=y(v);
+    s+='<line x1="'+padL+'" y1="'+gy+'" x2="'+(W-padR)+'" y2="'+gy+'" stroke="'+(v===0?css('--baseline'):css('--grid'))+'" stroke-width="1"/>';
+    s+='<text x="'+(padL-8)+'" y="'+(gy+4)+'" text-anchor="end" font-size="11" fill="'+css('--ink-3')+'" style="font-variant-numeric:tabular-nums">'+(v/1000)+(v?'k':'')+'</text>';
+  }
+  /* bars: actual + forecast pairs, 2px surface gap between neighbors */
+  const bw=22, gap=2;
+  week.days.forEach((d,i)=>{
+    const cx=x(i);
+    if(week.actual[i]!=null){
+      const bh=plotH*week.actual[i]/yMax;
+      s+='<rect class="hit" data-i="'+i+'" x="'+(cx-bw-gap/2)+'" y="'+(y(week.actual[i]))+'" width="'+bw+'" height="'+bh+'" rx="4" fill="'+css('--s1')+'"/>';
+      s+='<rect x="'+(cx-bw-gap/2)+'" y="'+(H-padB-4)+'" width="'+bw+'" height="4" fill="'+css('--s1')+'"/>';
+    }
+    const fh=plotH*week.forecast[i]/yMax;
+    s+='<rect class="hit" data-i="'+i+'" x="'+(cx+gap/2)+'" y="'+(y(week.forecast[i]))+'" width="'+bw+'" height="'+fh+'" rx="4" fill="'+css('--s2')+'"'+(week.actual[i]==null?' opacity="0.55"':'')+'/>';
+    s+='<rect x="'+(cx+gap/2)+'" y="'+(H-padB-4)+'" width="'+bw+'" height="4" fill="'+css('--s2')+'"'+(week.actual[i]==null?' opacity="0.55"':'')+'/>';
+    s+='<text x="'+cx+'" y="'+(H-10)+'" text-anchor="middle" font-size="11.5" fill="'+css('--ink-2')+'">'+d.split(" ")[0]+'</text>';
+  });
+  /* LY line + markers with surface ring */
+  let path="",started=false;
+  week.ly.forEach((v,i)=>{ if(v!=null){ path+=(started?"L":"M")+x(i)+" "+y(v)+" "; started=true; }});
+  s+='<path d="'+path+'" fill="none" stroke="'+css('--s3')+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+  week.ly.forEach((v,i)=>{ if(v!=null){
+    s+='<circle class="hit" data-i="'+i+'" cx="'+x(i)+'" cy="'+y(v)+'" r="6" fill="'+css('--s3')+'" stroke="'+css('--surface-1')+'" stroke-width="2"/>';
+  }});
+  /* selective direct label: yesterday's actual (the story) */
+  s+='<text x="'+(x(5)-bw/2-gap/2)+'" y="'+(y(week.actual[5])-7)+'" text-anchor="middle" font-size="11.5" font-weight="650" fill="'+css('--ink-1')+'" style="font-variant-numeric:tabular-nums">'+fmt(week.actual[5])+'</text>';
+  s+='</svg>';
+  document.getElementById("chart").innerHTML=s;
+
+  /* tooltip */
+  const tip=document.getElementById("tip");
+  document.getElementById("chart").addEventListener("mousemove",e=>{
+    const t=e.target.closest(".hit");
+    if(!t){tip.style.opacity=0;return;}
+    const i=+t.dataset.i;
+    let h='<div class="t-day">'+week.days[i]+'</div>';
+    if(week.actual[i]!=null)h+='<div class="t-row"><span>Actual</span><b>'+fmt(week.actual[i])+'</b></div>';
+    h+='<div class="t-row"><span>Forecast</span><b>'+fmt(week.forecast[i])+'</b></div>';
+    if(week.ly[i]!=null)h+='<div class="t-row"><span>Last year</span><b>'+fmt(week.ly[i])+'</b></div>';
+    if(week.actual[i]!=null)h+='<div class="t-row"><span>vs forecast</span><b>'+((week.actual[i]/week.forecast[i]-1)*100).toFixed(1)+'%</b></div>';
+    tip.innerHTML=h;
+    tip.style.left=Math.min(e.clientX+14,window.innerWidth-250)+"px";
+    tip.style.top=(e.clientY+12)+"px";
+    tip.style.opacity=1;
+  });
+  document.getElementById("chart").addEventListener("mouseleave",()=>tip.style.opacity=0);
+
+  /* ============ DUTY GRID ============ */
+  const dayHdr=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  let g="<tr><th>Duty</th>"+dayHdr.map(d=>"<th class='c'>"+d+"</th>").join("")+"</tr>";
+  const cell=v=>{
+    if(v==="ok")return"<span class='cell ok'>✓ OK</span>";
+    if(v==="flag")return"<span class='cell flag'>⚑ FLAG</span>";
+    if(v==="na")return"<span class='cell na'>—</span>";
+    if(v==="pend")return"<span class='cell pend'>·</span>";
+    return"<span class='cell pend'></span>";
+  };
+  duties.forEach(r=>{ g+="<tr><td class='duty'>"+r[0]+"</td>"+r[1].map(v=>"<td class='c'>"+cell(v)+"</td>").join("")+"</tr>"; });
+  document.getElementById("grid").innerHTML=g;
+
+  /* ============ CADENCE METERS ============ */
+  let m="";
+  meters.forEach(r=>{
+    const[label,used,total,note]=r;
+    const pct=Math.min(100,used/total*100);
+    const fill=pct>=100?css('--critical'):pct>=75?css('--warn'):css('--s1');
+    m+='<div class="meter-row"><div class="meter-label">'+label+'</div>'
+      +'<div class="meter"><div class="fill" style="width:'+pct+'%;background:'+fill+'"></div></div>'
+      +'<div class="meter-days">'+(note?note+" · ":"")+used+' / '+total+' days</div></div>';
+  });
+  document.getElementById("meters").innerHTML=m;
+})();
+</script>
+</body>
+</html>
