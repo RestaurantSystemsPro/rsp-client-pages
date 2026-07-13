@@ -88,46 +88,47 @@
 <div class="wrap">
   <header>
     <h1>Wally's Pizza &amp; Sports Bar</h1>
-    <span class="asof">Owner status · updated through Sat, Jul 11, 2026</span>
+    <span class="asof">Owner status · updated through Sun, Jul 12, 2026 · week complete</span>
   </header>
   <p class="subtitle">Silence is good news. Anything needing your attention is flagged below, with the number that broke the rule.</p>
 
   <!-- KPI TILES -->
   <div class="tiles">
     <div class="tile hero">
-      <div class="label">Yesterday's sales (Sat 7/11)</div>
-      <div class="value">$15,925</div>
-      <div class="delta up">▲ 12.1% vs forecast&nbsp;&nbsp;·&nbsp;&nbsp;▲ 12.2% vs last year</div>
+      <div class="label">Yesterday's sales (Sun 7/12)</div>
+      <div class="value">$12,604</div>
+      <div class="delta"><span class="delta down">▼ 15.8% vs forecast</span>&nbsp;&nbsp;·&nbsp;&nbsp;▼ 4.8% vs last year · slow dinner, no sports on, staff cut early</div>
     </div>
     <div class="tile">
-      <div class="label">Week to date (Mon–Sat)</div>
-      <div class="value">$74,716</div>
-      <div class="delta up">▲ 8.1% vs forecast ($69,108)</div>
+      <div class="label">Week final (Jul 6–12)</div>
+      <div class="value">$87,320</div>
+      <div class="delta up">▲ 3.8% vs forecast ($84,083)</div>
     </div>
     <div class="tile">
       <div class="label">Over / short</div>
-      <div class="value">$4.00</div>
-      <div class="delta">within $20 tolerance ✓</div>
+      <div class="value">$0.00</div>
+      <div class="delta">cash proves to the penny ✓</div>
     </div>
     <div class="tile">
-      <div class="label">Labor (Sat)</div>
-      <div class="value">24.0%</div>
-      <div class="delta">budget 23.3% · +0.7 pts, in range</div>
+      <div class="label">Labor (Sun)</div>
+      <div class="value">28.3%</div>
+      <div class="delta">budget 23.3% · +4.9 pts, inside tolerance</div>
     </div>
     <div class="tile">
       <div class="label">Open flags</div>
-      <div class="value">3</div>
-      <div class="statusline"><span class="dot" style="background:var(--critical)"></span>1 high <span class="dot" style="background:var(--serious)"></span>2 medium</div>
+      <div class="value">4</div>
+      <div class="statusline"><span class="dot" style="background:var(--critical)"></span>2 high <span class="dot" style="background:var(--serious)"></span>2 medium</div>
     </div>
   </div>
 
   <!-- FLAGS -->
   <div class="card">
-    <h2>⚑ Flags needing attention — Sat, Jul 11</h2>
-    <div class="flag high"><span class="sev">HIGH</span><div><b>Price increase over 5%:</b> Fernet Branca (Golden Brands) $31.26 → $35.76, <b>+14.4%</b>. Check the invoice or renegotiate before the next order.</div></div>
-    <div class="flag med"><span class="sev">MEDIUM</span><div><b>Invoice contradiction:</b> no invoices entered on 7/10 or 7/11, but the manager checklist attests invoices were scanned and uploaded. The data and the attestation disagree.</div></div>
-    <div class="flag med"><span class="sev">MEDIUM</span><div><b>Daily non-negotiables marked No:</b> POs hanging, prep sheets, Daily Key Item Report, yield sheets, unpaid-invoice audit. (These were setup-test entries; managers take over from 7/12.)</div></div>
-    <div class="flag note"><span class="sev">NOTES</span><div>Pasta station found unplugged · Ovation trends: burnt bacon complaints, online ordering portal issues · Greek salad 86'd · Kudos: Cora training Julianna, Mary team player. — Emil Andy Peterson</div></div>
+    <h2>⚑ Flags needing attention — Sun, Jul 12</h2>
+    <div class="flag high"><span class="sev">HIGH</span><div><b>Sunday end-of-week inventory not confirmed.</b> No inventory evidence in the log and the checklist wasn't filled out. If inventories weren't done, this week's usage and COGS numbers will be wrong.</div></div>
+    <div class="flag high"><span class="sev">HIGH</span><div><b>Refrigeration equipment risk, two units:</b> lowboy under pasta needs a fan blade ("nursing it along") and the walk-in needs a new door closer, it won't shut on its own. That closer explains the door-left-open reports. Repair approval is the cheap option. — Bob Burns</div></div>
+    <div class="flag med"><span class="sev">MEDIUM</span><div><b>Non-Negotiables checklist not completed</b> on 7/12, no check-offs from either manager. First real day on the system; this checklist is how duties get verified.</div></div>
+    <div class="flag med"><span class="sev">MEDIUM</span><div><b>No invoices entered 3 days running</b> (7/10–7/12). Weekend gaps are normal; escalates if still empty Tuesday morning. Carry-over: Fernet Branca +14.4% price jump from Saturday still needs a look.</div></div>
+    <div class="flag note"><span class="sev">NOTES</span><div>Pasta station cord fell behind equipment, unreachable · Hedyeh called out (family emergency) · Wings complaint handled, receipt saved · Kudos: Liam, Kaylei P · Hiring interviews for servers/host Wednesday. — Bob Burns / Emil Andy Peterson</div></div>
   </div>
 
   <!-- SALES CHART -->
@@ -163,38 +164,38 @@
   /* ============ DATA (updated by Claude each morning) ============ */
   const week = {
     days:["Mon 7/6","Tue 7/7","Wed 7/8","Thu 7/9","Fri 7/10","Sat 7/11","Sun 7/12"],
-    actual:[12521.56,9627.52,10167.77,10249.09,16225.29,15924.73,null],
+    actual:[12521.56,9627.52,10167.77,10249.09,16225.29,15924.73,12603.97],
     forecast:[9056.75,8980.72,9955.34,11477.36,15428.37,14209.14,14975.63],
     ly:[null,null,null,null,15187.15,14193.73,13233.72]
   };
   const duties=[
-    ["Manager log dispatched",           [null,null,null,null,null,"ok","pend"]],
-    ["EOD paperwork / sales posted",     [null,null,null,null,null,"ok","pend"]],
-    ["Over/short within $20",            [null,null,null,null,null,"ok","pend"]],
-    ["Cash proves (cash vs proof)",      [null,null,null,null,null,"ok","pend"]],
-    ["Paid outs logged w/ receipts",     [null,null,null,null,null,"ok","pend"]],
-    ["Invoices entered / price compare", [null,null,null,null,null,"flag","pend"]],
-    ["Price changes reviewed (>5%)",     [null,null,null,null,null,"flag","pend"]],
-    ["POs placed &amp; hanging",         [null,null,null,null,null,"flag","pend"]],
-    ["Labor tracked, on budget",         [null,null,null,null,null,"ok","pend"]],
-    ["Prep sheets used",                 [null,null,null,null,null,"flag","pend"]],
-    ["Pre-shift meeting held",           [null,null,null,null,null,"ok","pend"]],
-    ["Key item report",                  [null,null,null,null,null,"flag","pend"]],
-    ["Yield sheets",                     [null,null,null,null,null,"flag","pend"]],
-    ["Unpaid-invoice audit / COGS to QB",[null,null,null,null,null,"flag","pend"]],
-    ["Checklists complete (Jolt)",       [null,null,null,null,null,"ok","pend"]],
-    ["Sunday inventory",                 [null,null,null,null,null,"na","pend"]]
+    ["Manager log dispatched",           [null,null,null,null,null,"ok","ok"]],
+    ["EOD paperwork / sales posted",     [null,null,null,null,null,"ok","ok"]],
+    ["Over/short within $20",            [null,null,null,null,null,"ok","ok"]],
+    ["Cash proves (cash vs proof)",      [null,null,null,null,null,"ok","ok"]],
+    ["Paid outs logged w/ receipts",     [null,null,null,null,null,"ok","na"]],
+    ["Invoices entered / price compare", [null,null,null,null,null,"flag","flag"]],
+    ["Price changes reviewed (>5%)",     [null,null,null,null,null,"flag","ok"]],
+    ["POs placed &amp; hanging",         [null,null,null,null,null,"flag","miss"]],
+    ["Labor tracked, on budget",         [null,null,null,null,null,"ok","ok"]],
+    ["Prep sheets used",                 [null,null,null,null,null,"flag","miss"]],
+    ["Pre-shift meeting held",           [null,null,null,null,null,"ok","ok"]],
+    ["Key item report",                  [null,null,null,null,null,"flag","miss"]],
+    ["Yield sheets",                     [null,null,null,null,null,"flag","miss"]],
+    ["Unpaid-invoice audit / COGS to QB",[null,null,null,null,null,"flag","miss"]],
+    ["Checklists complete (Jolt)",       [null,null,null,null,null,"ok","ok"]],
+    ["Sunday inventory",                 [null,null,null,null,null,"na","flag"]]
   ];
   /* days since last check-off vs allowed cycle */
   const meters=[
-    ["Weekly training planned",1,7],
-    ["Weekly manager meeting",1,7],
-    ["$ per labor hour review",1,7,"due Thursdays"],
-    ["Restaurant walkthrough",1,14],
-    ["Equipment inspection",1,31],
-    ["End-of-month inventories",1,31],
-    ["Auto pars regenerated",1,42],
-    ["August forecast input",0,9,"due by Jul 20"]
+    ["Weekly training planned",2,7],
+    ["Weekly manager meeting",2,7],
+    ["$ per labor hour review",2,7,"due Thursdays"],
+    ["Restaurant walkthrough",2,14],
+    ["Equipment inspection",2,31],
+    ["End-of-month inventories",2,31],
+    ["Auto pars regenerated",2,42],
+    ["August forecast input",1,9,"due by Jul 20"]
   ];
 
   const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
@@ -264,6 +265,7 @@
     if(v==="ok")return"<span class='cell ok'>✓ OK</span>";
     if(v==="flag")return"<span class='cell flag'>⚑ FLAG</span>";
     if(v==="na")return"<span class='cell na'>—</span>";
+    if(v==="miss")return"<span class='cell flag'>? MISSING</span>";
     if(v==="pend")return"<span class='cell pend'>·</span>";
     return"<span class='cell pend'></span>";
   };
