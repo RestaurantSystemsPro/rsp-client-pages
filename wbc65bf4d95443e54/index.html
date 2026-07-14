@@ -88,19 +88,19 @@
 <div class="wrap">
   <header>
     <h1>Wally's Pizza &amp; Sports Bar</h1>
-    <span class="asof">Owner status · updated through Sun, Jul 12, 2026 · week complete</span>
+    <span class="asof">Owner status · updated through Mon, Jul 13, 2026</span>
   </header>
   <p class="subtitle">Silence is good news. Anything needing your attention is flagged below, with the number that broke the rule.</p>
 
   <!-- KPI TILES -->
   <div class="tiles">
     <div class="tile hero">
-      <div class="label">Yesterday's sales (Sun 7/12)</div>
-      <div class="value">$12,604</div>
-      <div class="delta"><span class="delta down">▼ 15.8% vs forecast</span>&nbsp;&nbsp;·&nbsp;&nbsp;▼ 4.8% vs last year · slow dinner, no sports on, staff cut early</div>
+      <div class="label">Yesterday's sales (Mon 7/13)</div>
+      <div class="value">$8,424</div>
+      <div class="delta"><span class="delta down">▼ 7.0% vs forecast</span>&nbsp;&nbsp;·&nbsp;&nbsp;▼ 8.8% vs last year · slow night, no sales-miss flag</div>
     </div>
     <div class="tile">
-      <div class="label">Week final (Jul 6–12)</div>
+      <div class="label">Last week final (Jul 6–12)</div>
       <div class="value">$87,320</div>
       <div class="delta up">▲ 3.8% vs forecast ($84,083)</div>
     </div>
@@ -110,25 +110,26 @@
       <div class="delta">cash proves to the penny ✓</div>
     </div>
     <div class="tile">
-      <div class="label">Labor (Sun)</div>
-      <div class="value">28.3%</div>
-      <div class="delta">budget 23.3% · +4.9 pts, inside tolerance</div>
+      <div class="label">Labor (Mon)</div>
+      <div class="value">33.2%</div>
+      <div class="delta down">budget 23.4% · +9.8 pts on a slow night ⚑</div>
     </div>
     <div class="tile">
       <div class="label">Open flags</div>
-      <div class="value">4</div>
-      <div class="statusline"><span class="dot" style="background:var(--critical)"></span>2 high <span class="dot" style="background:var(--serious)"></span>2 medium</div>
+      <div class="value">5</div>
+      <div class="statusline"><span class="dot" style="background:var(--critical)"></span>4 high <span class="dot" style="background:var(--serious)"></span>1 medium</div>
     </div>
   </div>
 
   <!-- FLAGS -->
   <div class="card">
-    <h2>⚑ Flags needing attention — Sun, Jul 12</h2>
-    <div class="flag high"><span class="sev">HIGH</span><div><b>Sunday end-of-week inventory not confirmed.</b> No inventory evidence in the log and the checklist wasn't filled out. If inventories weren't done, this week's usage and COGS numbers will be wrong.</div></div>
-    <div class="flag high"><span class="sev">HIGH</span><div><b>Refrigeration equipment risk, two units:</b> lowboy under pasta needs a fan blade ("nursing it along") and the walk-in needs a new door closer, it won't shut on its own. That closer explains the door-left-open reports. Repair approval is the cheap option. — Bob Burns</div></div>
-    <div class="flag med"><span class="sev">MEDIUM</span><div><b>Non-Negotiables checklist not completed</b> on 7/12, no check-offs from either manager. First real day on the system; this checklist is how duties get verified.</div></div>
-    <div class="flag med"><span class="sev">MEDIUM</span><div><b>No invoices entered 3 days running</b> (7/10–7/12). Weekend gaps are normal; escalates if still empty Tuesday morning. Carry-over: Fernet Branca +14.4% price jump from Saturday still needs a look.</div></div>
-    <div class="flag note"><span class="sev">NOTES</span><div>Pasta station cord fell behind equipment, unreachable · Hedyeh called out (family emergency) · Wings complaint handled, receipt saved · Kudos: Liam, Kaylei P · Hiring interviews for servers/host Wednesday. — Bob Burns / Emil Andy Peterson</div></div>
+    <h2>⚑ Flags needing attention — Mon, Jul 13 + Budget Variance Report</h2>
+    <div class="flag high"><span class="sev">HIGH</span><div><b>COGS blown up by missing inventory:</b> Budget Variance shows $43,259 COGS against $8,424 sales (513%). Sunday's inventory was never entered, so the system counts on-hand product as usage. COGS is unusable until inventories go in.</div></div>
+    <div class="flag high"><span class="sev">HIGH</span><div><b>Hourly labor shows $0 in the Budget Variance module</b> for every position, while Reverse Labor has the hours. The labor feed/allotment isn't connected to the budget report.</div></div>
+    <div class="flag high"><span class="sev">HIGH</span><div><b>Checklist pattern, 3 days running:</b> prep sheets, Daily Key Item Report, yield sheets, and the unpaid-invoice audit are FLAG or MISSING three consecutive days. The Non-Negotiables checklist still isn't being filled out. Monday's due items (ideal cost, usage reports, value waste sheets) went unattested.</div></div>
+    <div class="flag high"><span class="sev">HIGH</span><div><b>No invoices entered 4 consecutive days</b> (7/10–7/13). The weekend excuse is gone.</div></div>
+    <div class="flag med"><span class="sev">MEDIUM</span><div><b>Monday labor 33.2% vs 23.4% budget</b> (+9.8 pts) on a 7% sales miss. Hours were trimmed (153.9 vs 162.4 scheduled) but not enough for the slow night.</div></div>
+    <div class="flag note"><span class="sev">NOTES</span><div>Clean: over/short $0.00, cash proved exactly, 5 orders placed with confirmations · Kudos: Kaylee B (party of 14 complimented service), Alissa · Open repairs from 7/12: lowboy fan blade, walk-in door closer, pasta station cord. — Emil Andy Peterson / Tony Arana</div></div>
   </div>
 
   <!-- SALES CHART -->
@@ -144,7 +145,7 @@
 
   <!-- DUTY SCORECARD -->
   <div class="card">
-    <h2>Duty scorecard — week of Jul 6</h2>
+    <h2>Duty scorecard — week of Jul 13</h2>
     <table id="grid"></table>
   </div>
 
@@ -163,39 +164,39 @@
   "use strict";
   /* ============ DATA (updated by Claude each morning) ============ */
   const week = {
-    days:["Mon 7/6","Tue 7/7","Wed 7/8","Thu 7/9","Fri 7/10","Sat 7/11","Sun 7/12"],
-    actual:[12521.56,9627.52,10167.77,10249.09,16225.29,15924.73,12603.97],
+    days:["Mon 7/13","Tue 7/14","Wed 7/15","Thu 7/16","Fri 7/17","Sat 7/18","Sun 7/19"],
+    actual:[8423.85,null,null,null,null,null,null],
     forecast:[9056.75,8980.72,9955.34,11477.36,15428.37,14209.14,14975.63],
-    ly:[null,null,null,null,15187.15,14193.73,13233.72]
+    ly:[9240.15,8087.00,8984.03,10342.89,15837.48,12424.87,14922.74]
   };
   const duties=[
-    ["Manager log dispatched",           [null,null,null,null,null,"ok","ok"]],
-    ["EOD paperwork / sales posted",     [null,null,null,null,null,"ok","ok"]],
-    ["Over/short within $20",            [null,null,null,null,null,"ok","ok"]],
-    ["Cash proves (cash vs proof)",      [null,null,null,null,null,"ok","ok"]],
-    ["Paid outs logged w/ receipts",     [null,null,null,null,null,"ok","na"]],
-    ["Invoices entered / price compare", [null,null,null,null,null,"flag","flag"]],
-    ["Price changes reviewed (>5%)",     [null,null,null,null,null,"flag","ok"]],
-    ["POs placed &amp; hanging",         [null,null,null,null,null,"flag","miss"]],
-    ["Labor tracked, on budget",         [null,null,null,null,null,"ok","ok"]],
-    ["Prep sheets used",                 [null,null,null,null,null,"flag","miss"]],
-    ["Pre-shift meeting held",           [null,null,null,null,null,"ok","ok"]],
-    ["Key item report",                  [null,null,null,null,null,"flag","miss"]],
-    ["Yield sheets",                     [null,null,null,null,null,"flag","miss"]],
-    ["Unpaid-invoice audit / COGS to QB",[null,null,null,null,null,"flag","miss"]],
-    ["Checklists complete (Jolt)",       [null,null,null,null,null,"ok","ok"]],
-    ["Sunday inventory",                 [null,null,null,null,null,"na","flag"]]
+    ["Manager log dispatched",           ["ok",null,null,null,null,null,null]],
+    ["EOD paperwork / sales posted",     ["ok",null,null,null,null,null,null]],
+    ["Over/short within $20",            ["ok",null,null,null,null,null,null]],
+    ["Cash proves (cash vs proof)",      ["ok",null,null,null,null,null,null]],
+    ["Paid outs logged w/ receipts",     ["na",null,null,null,null,null,null]],
+    ["Invoices entered / price compare", ["flag",null,null,null,null,null,null]],
+    ["Price changes reviewed (>5%)",     ["ok",null,null,null,null,null,null]],
+    ["POs placed &amp; hanging",         ["ok",null,null,null,null,null,null]],
+    ["Labor tracked, on budget",         ["flag",null,null,null,null,null,null]],
+    ["Prep sheets used",                 ["miss",null,null,null,null,null,null]],
+    ["Pre-shift meeting held",           ["ok",null,null,null,null,null,null]],
+    ["Key item report",                  ["miss",null,null,null,null,null,null]],
+    ["Yield sheets",                     ["miss",null,null,null,null,null,null]],
+    ["Unpaid-invoice audit / COGS to QB",["miss",null,null,null,null,null,null]],
+    ["Checklists complete (Jolt)",       ["ok",null,null,null,null,null,null]],
+    ["Monday: ideal cost generated",     ["miss",null,null,null,null,null,null]]
   ];
   /* days since last check-off vs allowed cycle */
   const meters=[
-    ["Weekly training planned",2,7],
-    ["Weekly manager meeting",2,7],
-    ["$ per labor hour review",2,7,"due Thursdays"],
-    ["Restaurant walkthrough",2,14],
-    ["Equipment inspection",2,31],
-    ["End-of-month inventories",2,31],
-    ["Auto pars regenerated",2,42],
-    ["August forecast input",1,9,"due by Jul 20"]
+    ["Weekly training planned",3,7],
+    ["Weekly manager meeting",3,7],
+    ["$ per labor hour review",3,7,"due Thursdays"],
+    ["Restaurant walkthrough",3,14],
+    ["Equipment inspection",3,31],
+    ["End-of-month inventories",3,31],
+    ["Auto pars regenerated",3,42],
+    ["August forecast input",2,9,"due by Jul 20"]
   ];
 
   const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
@@ -236,7 +237,8 @@
     s+='<circle class="hit" data-i="'+i+'" cx="'+x(i)+'" cy="'+y(v)+'" r="6" fill="'+css('--s3')+'" stroke="'+css('--surface-1')+'" stroke-width="2"/>';
   }});
   /* selective direct label: yesterday's actual (the story) */
-  s+='<text x="'+(x(5)-bw/2-gap/2)+'" y="'+(y(week.actual[5])-7)+'" text-anchor="middle" font-size="11.5" font-weight="650" fill="'+css('--ink-1')+'" style="font-variant-numeric:tabular-nums">'+fmt(week.actual[5])+'</text>';
+  let li=-1; week.actual.forEach((v,i)=>{if(v!=null)li=i;});
+  if(li>=0)s+='<text x="'+(x(li)-bw/2-gap/2)+'" y="'+(y(week.actual[li])-7)+'" text-anchor="middle" font-size="11.5" font-weight="650" fill="'+css('--ink-1')+'" style="font-variant-numeric:tabular-nums">'+fmt(week.actual[li])+'</text>';
   s+='</svg>';
   document.getElementById("chart").innerHTML=s;
 
