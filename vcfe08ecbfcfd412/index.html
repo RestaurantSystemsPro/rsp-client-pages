@@ -90,39 +90,45 @@
 <div class="wrap">
   <header>
     <h1>Vivio's Warren</h1>
-    <span class="asof">Owner status · system live Wed, Aug 19, 2026 · sales seeded from Toast · awaiting first Daily Manager Log</span>
+    <span class="asof">Owner status · updated through Wed, Aug 19, 2026 · first Daily Manager Log received</span>
   </header>
   <p class="subtitle">Silence is good news. Anything needing your attention is flagged below, with the number that broke the rule and who was on duty.</p>
 
   <!-- KPI TILES -->
   <div class="tiles">
     <div class="tile hero">
-      <div class="label">Yesterday's sales (Tue 8/18, Toast)</div>
-      <div class="value">$2,204</div>
-      <div class="delta down">▼ 38.9% vs last year ($3,605) · forecast coverage begins Wed 8/19 · the manager log will tell us WHY once it dispatches</div>
+      <div class="label">Yesterday's sales (Wed 8/19)</div>
+      <div class="value">$3,041</div>
+      <div class="delta down">▼ 37.6% vs forecast and last year ($4,872) · week-to-date $7,547 vs $11,870 forecast (▼36.4%)</div>
     </div>
     <div class="tile">
       <div class="label">Over / short</div>
-      <div class="value">—</div>
-      <div class="delta">daily counted cash, not the POS number</div>
+      <div class="value">-$0.19</div>
+      <div class="delta">$440 deposit was on the paper sheet, not in RSP; entered by Fred · closer enters it nightly from now on</div>
     </div>
     <div class="tile">
       <div class="label">Labor (yesterday)</div>
-      <div class="value">—</div>
-      <div class="delta">reverse labor summary vs budget</div>
+      <div class="value">28.8%</div>
+      <div class="delta">vs 22.4% necessary (+6.4 pts, driven by the sales miss) · schedule $1,065 under budget, mix off</div>
     </div>
     <div class="tile">
       <div class="label">Open flags</div>
-      <div class="value">1</div>
-      <div class="statusline"><span class="dot" style="background:var(--critical)"></span>1 critical · 0 high · 0 medium</div>
+      <div class="value">7</div>
+      <div class="statusline"><span class="dot" style="background:var(--critical)"></span>4 high · 3 medium</div>
     </div>
   </div>
 
   <!-- FLAGS -->
   <div class="card">
-    <h2>⚑ Flags needing attention — Wed, Aug 19</h2>
-    <div class="flag crit"><span class="sev">CRITICAL</span><div><b>A1 — the Daily Manager Log is not dispatching yet.</b> Until managers complete the log daily and the dispatch email is configured, nothing on this page can be verified: no cash trail, no invoice tracking, no labor check. This flag fires every morning until the first log arrives. Setup owner: Fred (schedule notification in RSP) + Vivio's managers (complete the log nightly).</div></div>
-    <div class="flag note"><span class="sev">NOTES</span><div><b>Sales trend (Toast history now loaded):</b> yesterday $2,204 vs $3,605 same Tuesday last year, down 38.9%. The trailing year runs $1.64M gross. The log's job is to tell us the WHY behind days like this. · <b>Getting ready behind the scenes:</b> inventory process rebuilt (second full count completed and much smoother) · recipe cards being entered by the RSP team so menu-item costs become real · cash controls rollout underway: the counted deposit entered daily, one bank deposit per day, every paid out recorded with a receipt and a name, DJs and cleaning crews included.</div></div>
+    <h2>⚑ Flags needing attention — Wed, Aug 19 (first live audit, updated after EOD posted)</h2>
+    <div class="flag high"><span class="sev">HIGH</span><div><b>V1 — deposit not entered in RSP; showed $440.19 short until the paper cash sheet surfaced.</b> The $440 deposit existed on Vivio's paper sheet but was never entered, so RSP showed Total Cash $3,678 vs Proof $3,238. Fred entered it and the over/short now reads $0.19. The fix that makes this never happen again: the closer counts the deposit and enters it in RSP nightly, with their name on it.</div></div>
+    <div class="flag high"><span class="sev">HIGH</span><div><b>C1 — four price increases over 5%.</b> Atlas American cheese $49.32 → $56.35 (+14.3%), GFS Red Wine Vinaigrette $68.96 → $74.17 (+7.6%), Atlas provolone +6.1%, Frog Holler mushrooms +5.3%. Check recipe costs before the next orders.</div></div>
+    <div class="flag high"><span class="sev">HIGH</span><div><b>E1 — schedule off budget.</b> Week of 8/17 scheduled $1,065 under labor budget with the mix wrong: servers $286 / 48 hrs OVER, expo unstaffed, managers 40 hrs vs 70 budgeted. Rebalance before the weekend.</div></div>
+    <div class="flag high"><span class="sev">HIGH</span><div><b>SALES MISS — Wednesday $3,041 vs $4,872 forecast and last year, down 37.6%.</b> Labor ran 28.8% against 22.4% necessary (+6.4 pts), driven by the sales miss, not extra hours.</div></div>
+    <div class="flag med"><span class="sev">MED</span><div><b>V2 — deposit-to-bank answered N/A.</b> One deposit per day, banked same day, never lumped.</div></div>
+    <div class="flag med"><span class="sev">MED</span><div><b>B4 — paid out missing receipt number.</b> The $150 trivia paid out is logged (good) but the receipt field holds a date, not a receipt number.</div></div>
+    <div class="flag med"><span class="sev">MED</span><div><b>Checklist — manager meeting not held;</b> only one daily duty checked Yes (prep sheets). From tonight the checklist belongs to the managers.</div></div>
+    <div class="flag note"><span class="sev">NOTES</span><div><b>What went right on night one:</b> Konnie opened, Joe closed, and Joe answered every question; the trivia paid out made it into the log; training topic set; September forecast on file. <b>Data checks:</b> steep produce DROPS at Frog Holler (green peppers -52%, grape tomatoes -25%, cilantro -70%), worth confirming units are right. <b>FYI:</b> dishwasher sent home Wed for attitude. A ready-to-send email is in Fred's drafts.</div></div>
   </div>
 
   <!-- SETUP CHECKLIST -->
@@ -132,11 +138,11 @@
       <div><span class="st done">DONE</span><span>Exception rulebook written — 25 rules across cash, purchasing, labor, weekly reports (thresholds: ±$20 cash, 5% price increases, $200 schedule variance, $500 unapproved orders).</span></div>
       <div><span class="st done">DONE</span><span>Manager log questions + non-negotiables checklist designed, v2 after Fred's review (9 questions; everything the system auto-reports was cut).</span></div>
       <div><span class="st done">DONE</span><span>Daily 3:00 AM Phoenix (6:00 AM Michigan) audit scheduled — reads the dispatch email, updates this page, and leaves a ready-to-send draft in Fred's email only when something is wrong.</span></div>
-      <div><span class="st open">OPEN</span><span>Enter the questions in RSP and point the Daily Manager Log dispatch at the auditor's inbox.</span></div>
-      <div><span class="st open">OPEN</span><span>Managers complete the log nightly — this is the non-negotiable that powers everything else.</span></div>
+      <div><span class="st done">DONE</span><span>Questions live in RSP; first Daily Manager Log dispatched and audited (Wed 8/19).</span></div>
+      <div><span class="st open">OPEN</span><span>Managers complete the log nightly — night one done (Joe, Wed 8/19); the streak is what matters now.</span></div>
       <div><span class="st done">DONE</span><span>Last-year sales reference loaded — 365 days of Toast history (Aug 2025 to Aug 2026) in Drive; the chart's LY line is live.</span></div>
       <div><span class="st done">DONE</span><span>Sales forecasts loaded through Sep 30 — August flat to last year, September at last year minus 10%. Forecast bars are live from Wed 8/19.</span></div>
-      <div><span class="st open">OPEN</span><span>Budget Variance (Tue) and Schedule Variance (Thu) report dispatches confirmed.</span></div>
+      <div><span class="st open">OPEN</span><span>Schedule Variance dispatch confirmed (arrived Thu 8/20). Budget Variance still to confirm next Tuesday.</span></div>
     </div>
   </div>
 
@@ -145,8 +151,8 @@
     <h2>Cash trail — the two places money can go missing</h2>
     <table>
       <tr><th>Checkpoint</th><th>What proves it</th><th class="c">Status</th></tr>
-      <tr><td class="duty">Register → report</td><td>Counted cash vs what the POS expected (over/short within $20, every paid out logged with a receipt)</td><td class="c"><span class="cell pend">awaiting first log</span></td></tr>
-      <tr><td class="duty">Report → bank</td><td>One deposit per day, reconciled against the bank statement (no lumping)</td><td class="c"><span class="cell pend">awaiting first log</span></td></tr>
+      <tr><td class="duty">Register → report</td><td>Counted cash vs what the POS expected (over/short within $20, every paid out logged with a receipt)</td><td class="c"><span class="cell flag">⚑ FLAG</span></td></tr>
+      <tr><td class="duty">Report → bank</td><td>One deposit per day, reconciled against the bank statement (no lumping)</td><td class="c"><span class="cell flag">⚑ FLAG</span></td></tr>
     </table>
     <p style="font-size:12px;color:var(--ink-3);margin-top:8px">Tracked separately on purpose: a shortage at the register and a shortage between the safe and the bank are different problems with different fixes. When both checkpoints prove daily, missing cash stops being a mystery.</p>
   </div>
@@ -184,43 +190,43 @@
   /* ============ DATA (updated by the auditor each morning) ============ */
   const week = {
     days:["Mon 8/17","Tue 8/18","Wed 8/19","Thu 8/20","Fri 8/21","Sat 8/22","Sun 8/23"],
-    actual:[2301.97,2204.32,null,null,null,null,null],
+    actual:[2301.97,2204.32,3041.14,null,null,null,null],
     forecast:[null,null,4871.90,3790.82,5249.95,5916.39,6228.51],
     ly:[null,3604.70,4871.90,3790.82,5249.95,5916.39,6228.51]
   };
   const duties=[
-    ["Manager log completed",             ["miss","miss","pend","pend","pend","pend","pend"]],
-    ["Cash deposit counted &amp; entered (not the POS number)",["pend","pend","pend","pend","pend","pend","pend"]],
-    ["Deposit banked daily (no lumping)", ["pend","pend","pend","pend","pend","pend","pend"]],
-    ["Paid outs logged w/ receipts",      ["pend","pend","pend","pend","pend","pend","pend"]],
-    ["Purchase allotment / POs in guidelines",["pend","pend","pend","pend","pend","pend","pend"]],
-    ["Orders >$500 over PA owner-approved",["pend","pend","pend","pend","pend","pend","pend"]],
-    ["POs placed &amp; hanging",          ["pend","pend","pend","pend","pend","pend","pend"]],
-    ["Recipe card on every special / POS button",["pend","pend","pend","pend","pend","pend","pend"]],
-    ["Ops checklists complete (digital)", ["pend","pend","pend","pend","pend","pend","pend"]],
-    ["Prep sheets used",                  ["pend","pend","pend","pend","pend","pend","pend"]],
-    ["Pre-shift held (form in binder)",   ["pend","pend","pend","pend","pend","pend","pend"]],
-    ["Unpaid-invoice audit",              ["pend","pend","pend","pend","pend","pend","pend"]],
-    ["Key item report",                   ["pend","pend","pend","pend","pend","pend","pend"]],
-    ["Auto: sales posted (Toast)",        ["ok","ok","pend","pend","pend","pend","pend"]],
-    ["Auto: invoices uploaded",           ["pend","pend","pend","pend","pend","pend","pend"]],
-    ["Auto: price increases &le;5%",      ["pend","pend","pend","pend","pend","pend","pend"]],
-    ["Auto: over/short within $20",       ["pend","pend","pend","pend","pend","pend","pend"]],
-    ["Auto: labor on budget (reverse labor)",["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Manager log completed",             ["miss", "miss", "ok", "pend", "pend", "pend", "pend"]],
+    ["Cash deposit counted &amp; entered (not the POS number)",["pend", "pend", "flag", "pend", "pend", "pend", "pend"]],
+    ["Deposit banked daily (no lumping)", ["pend", "pend", "flag", "pend", "pend", "pend", "pend"]],
+    ["Paid outs logged w/ receipts",      ["pend", "pend", "flag", "pend", "pend", "pend", "pend"]],
+    ["Purchase allotment / POs in guidelines",["pend", "pend", "flag", "pend", "pend", "pend", "pend"]],
+    ["Orders >$500 over PA owner-approved",["pend", "pend", "flag", "pend", "pend", "pend", "pend"]],
+    ["POs placed &amp; hanging",          ["pend", "pend", "flag", "pend", "pend", "pend", "pend"]],
+    ["Recipe card on every special / POS button",["pend", "pend", "flag", "pend", "pend", "pend", "pend"]],
+    ["Ops checklists complete (digital)", ["pend", "pend", "flag", "pend", "pend", "pend", "pend"]],
+    ["Prep sheets used",                  ["pend", "pend", "ok", "pend", "pend", "pend", "pend"]],
+    ["Pre-shift held (form in binder)",   ["pend", "pend", "flag", "pend", "pend", "pend", "pend"]],
+    ["Unpaid-invoice audit",              ["pend", "pend", "flag", "pend", "pend", "pend", "pend"]],
+    ["Key item report",                   ["pend", "pend", "flag", "pend", "pend", "pend", "pend"]],
+    ["Auto: sales posted (Toast)",        ["ok", "ok", "ok", "pend", "pend", "pend", "pend"]],
+    ["Auto: invoices uploaded",           ["pend", "pend", "miss", "pend", "pend", "pend", "pend"]],
+    ["Auto: price increases &le;5%",      ["pend", "pend", "flag", "pend", "pend", "pend", "pend"]],
+    ["Auto: over/short within $20",       ["pend", "pend", "flag", "pend", "pend", "pend", "pend"]],
+    ["Auto: labor on budget (reverse labor)",["pend", "pend", "ok", "pend", "pend", "pend", "pend"]],
     ["Mon: usage + ideal cost + waste sheets",["pend","na","na","na","na","na","na"]],
     ["Tue: budget variance analyzed",     ["na","pend","na","na","na","na","na"]],
-    ["Wed: training plan + mgr meeting",  ["na","na","pend","na","na","na","na"]],
+    ["Wed: training plan + mgr meeting",  ["na", "na", "flag", "na", "na", "na", "na"]],
     ["Thu: $/labor hr + SVR + approve schedules",["na","na","na","pend","na","na","na"]]
   ];
   /* days since last check-off vs allowed cycle */
   const meters=[
-    ["End-of-week inventories",3,7,"last full count Sun 8/16"],
-    ["Weekly training planned",0,7,"baseline starts with first log"],
-    ["Weekly manager meeting",0,7,"baseline starts with first log"],
-    ["Restaurant walkthrough",0,14,"baseline starts with first log"],
-    ["Equipment inspection",0,31,"baseline starts with first log"],
+    ["End-of-week inventories",4,7,"last full count Sun 8/16"],
+    ["Weekly training planned",0,7,"topic set Wed 8/19"],
+    ["Weekly manager meeting",1,7,"not held Wed 8/19"],
+    ["Restaurant walkthrough",1,14,"no walkthrough on record"],
+    ["Equipment inspection",1,31,"none on record"],
     ["Employee availabilities updated",0,31,"monthly; baseline starts with first log"],
-    ["Auto pars regenerated",0,42,"baseline starts with first log"],
+    ["Auto pars regenerated",1,42,"none on record"],
     ["Next month's forecast (Oct due Sep 20)",0,31,"September entered Aug 19, a day early"]
   ];
 
