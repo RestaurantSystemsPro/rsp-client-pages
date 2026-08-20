@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vivio's Warren — Owner Status</title>
+<style>
+  :root{
+    --surface-1:#fcfcfb; --page:#f9f9f7;
+    --ink-1:#0b0b0b; --ink-2:#52514e; --ink-3:#898781;
+    --grid:#e1e0d9; --baseline:#c3c2b7; --ring:rgba(11,11,11,.10);
+    --s1:#2a78d6; --s2:#1baf7a; --s3:#eda100;
+    --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --critical:#d03b3b;
+    --good-wash:rgba(12,163,12,.12); --serious-wash:rgba(236,131,90,.16); --critical-wash:rgba(208,59,59,.14);
+    --delta-good:#006300;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --surface-1:#1a1a19; --page:#0d0d0d;
+      --ink-1:#ffffff; --ink-2:#c3c2b7; --ink-3:#898781;
+      --grid:#2c2c2a; --baseline:#383835; --ring:rgba(255,255,255,.10);
+      --s1:#3987e5; --s2:#199e70; --s3:#c98500;
+      --delta-good:#0ca30c;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--page);color:var(--ink-1);padding:20px;line-height:1.4}
+  .wrap{max-width:1080px;margin:0 auto}
+  header{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:6px}
+  h1{font-size:22px;font-weight:650}
+  .asof{color:var(--ink-3);font-size:13px}
+  .subtitle{color:var(--ink-2);font-size:13px;margin-bottom:18px}
+  .card{background:var(--surface-1);border:1px solid var(--ring);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+  h2{font-size:13px;font-weight:600;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px}
+  .tile{background:var(--surface-1);border:1px solid var(--ring);border-radius:12px;padding:14px 16px}
+  .tile .label{font-size:12px;color:var(--ink-2)}
+  .tile .value{font-size:26px;font-weight:600;margin:2px 0}
+  .tile .delta{font-size:12px;color:var(--ink-2)}
+  .delta.up{color:var(--delta-good);font-weight:600}
+  .delta.down{color:var(--critical);font-weight:600}
+  .hero .value{font-size:44px}
+  .statusline{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+  .flag{display:flex;gap:10px;padding:9px 10px;border-radius:8px;margin-bottom:8px;font-size:13.5px;align-items:flex-start}
+  .flag:last-child{margin-bottom:0}
+  .flag .sev{flex:0 0 auto;font-size:11px;font-weight:700;letter-spacing:.03em;padding:2px 8px;border-radius:10px;color:#fff;margin-top:1px}
+  .flag.crit{background:var(--critical-wash)} .flag.crit .sev{background:var(--critical)}
+  .flag.high{background:var(--critical-wash)} .flag.high .sev{background:var(--critical)}
+  .flag.med{background:var(--serious-wash)} .flag.med .sev{background:var(--serious);color:#fff}
+  .flag.note{background:rgba(137,135,129,.10)} .flag.note .sev{background:var(--ink-3)}
+  .flag b{font-weight:650}
+  .legend{display:flex;gap:18px;font-size:12.5px;color:var(--ink-2);margin-bottom:8px;flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .key{width:12px;height:12px;border-radius:3px;display:inline-block}
+  .key.line{height:3px;border-radius:2px;width:16px}
+  svg text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+  .tooltip{position:fixed;pointer-events:none;background:var(--surface-1);border:1px solid var(--ring);box-shadow:0 4px 14px rgba(0,0,0,.18);border-radius:8px;padding:8px 11px;font-size:12.5px;color:var(--ink-1);opacity:0;transition:opacity .1s;z-index:10;max-width:240px}
+  .tooltip .t-day{font-weight:650;margin-bottom:3px}
+  .tooltip .t-row{display:flex;justify-content:space-between;gap:14px;color:var(--ink-2)}
+  .tooltip .t-row b{color:var(--ink-1);font-variant-numeric:tabular-nums}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-3);font-weight:600;text-align:left;padding:6px 8px;border-bottom:1px solid var(--grid)}
+  th.c,td.c{text-align:center}
+  td{padding:5px 8px;border-bottom:1px solid var(--grid);color:var(--ink-2)}
+  tr:last-child td{border-bottom:none}
+  td.duty{color:var(--ink-1)}
+  .cell{display:inline-flex;align-items:center;justify-content:center;min-width:34px;padding:2px 7px;border-radius:6px;font-size:11px;font-weight:650}
+  .cell.ok{background:var(--good-wash);color:var(--delta-good)}
+  .cell.flag{background:var(--critical-wash);color:var(--critical)}
+  .cell.na{color:var(--ink-3)}
+  .cell.pend{color:var(--ink-3);opacity:.55}
+  .meter-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;font-size:13px}
+  .meter-row:last-child{margin-bottom:0}
+  .meter-label{flex:0 0 220px;color:var(--ink-1)}
+  .meter{flex:1;height:10px;border-radius:5px;background:rgba(42,120,214,.16);overflow:hidden;position:relative}
+  .meter .fill{height:100%;border-radius:5px}
+  .meter-days{flex:0 0 150px;text-align:right;color:var(--ink-2);font-size:12px}
+  .steps{font-size:13px;color:var(--ink-2)}
+  .steps div{padding:6px 0;border-bottom:1px solid var(--grid);display:flex;gap:10px;align-items:flex-start}
+  .steps div:last-child{border-bottom:none}
+  .steps .st{flex:0 0 auto;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px}
+  .st.done{background:var(--good-wash);color:var(--delta-good)}
+  .st.open{background:var(--serious-wash);color:var(--serious)}
+  footer{color:var(--ink-3);font-size:11.5px;margin-top:6px;text-align:center}
+  @media (max-width:720px){.meter-label{flex-basis:130px}.meter-days{flex-basis:100px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Vivio's Warren</h1>
+    <span class="asof">Owner status · system live Wed, Aug 19, 2026 · sales seeded from Toast · awaiting first Daily Manager Log</span>
+  </header>
+  <p class="subtitle">Silence is good news. Anything needing your attention is flagged below, with the number that broke the rule and who was on duty.</p>
+
+  <!-- KPI TILES -->
+  <div class="tiles">
+    <div class="tile hero">
+      <div class="label">Yesterday's sales (Tue 8/18, Toast)</div>
+      <div class="value">$2,204</div>
+      <div class="delta down">▼ 38.9% vs last year ($3,605) · forecast coverage begins Wed 8/19 · the manager log will tell us WHY once it dispatches</div>
+    </div>
+    <div class="tile">
+      <div class="label">Over / short</div>
+      <div class="value">—</div>
+      <div class="delta">daily counted cash, not the POS number</div>
+    </div>
+    <div class="tile">
+      <div class="label">Labor (yesterday)</div>
+      <div class="value">—</div>
+      <div class="delta">reverse labor summary vs budget</div>
+    </div>
+    <div class="tile">
+      <div class="label">Open flags</div>
+      <div class="value">1</div>
+      <div class="statusline"><span class="dot" style="background:var(--critical)"></span>1 critical · 0 high · 0 medium</div>
+    </div>
+  </div>
+
+  <!-- FLAGS -->
+  <div class="card">
+    <h2>⚑ Flags needing attention — Wed, Aug 19</h2>
+    <div class="flag crit"><span class="sev">CRITICAL</span><div><b>A1 — the Daily Manager Log is not dispatching yet.</b> Until managers complete the log daily and the dispatch email is configured, nothing on this page can be verified: no cash trail, no invoice tracking, no labor check. This flag fires every morning until the first log arrives. Setup owner: Fred (schedule notification in RSP) + Vivio's managers (complete the log nightly).</div></div>
+    <div class="flag note"><span class="sev">NOTES</span><div><b>Sales trend (Toast history now loaded):</b> yesterday $2,204 vs $3,605 same Tuesday last year, down 38.9%. The trailing year runs $1.64M gross. The log's job is to tell us the WHY behind days like this. · <b>Getting ready behind the scenes:</b> inventory process rebuilt (second full count completed and much smoother) · recipe cards being entered by the RSP team so menu-item costs become real · cash controls rollout underway: the counted deposit entered daily, one bank deposit per day, every paid out recorded with a receipt and a name, DJs and cleaning crews included.</div></div>
+  </div>
+
+  <!-- SETUP CHECKLIST -->
+  <div class="card">
+    <h2>Launch checklist — what turns each section of this page on</h2>
+    <div class="steps">
+      <div><span class="st done">DONE</span><span>Exception rulebook written — 25 rules across cash, purchasing, labor, weekly reports (thresholds: ±$20 cash, 5% price increases, $200 schedule variance, $500 unapproved orders).</span></div>
+      <div><span class="st done">DONE</span><span>Manager log questions + non-negotiables checklist designed, v2 after Fred's review (9 questions; everything the system auto-reports was cut).</span></div>
+      <div><span class="st done">DONE</span><span>Daily 3:00 AM Phoenix (6:00 AM Michigan) audit scheduled — reads the dispatch email, updates this page, and leaves a ready-to-send draft in Fred's email only when something is wrong.</span></div>
+      <div><span class="st open">OPEN</span><span>Enter the questions in RSP and point the Daily Manager Log dispatch at the auditor's inbox.</span></div>
+      <div><span class="st open">OPEN</span><span>Managers complete the log nightly — this is the non-negotiable that powers everything else.</span></div>
+      <div><span class="st done">DONE</span><span>Last-year sales reference loaded — 365 days of Toast history (Aug 2025 to Aug 2026) in Drive; the chart's LY line is live.</span></div>
+      <div><span class="st done">DONE</span><span>Sales forecasts loaded through Sep 30 — August flat to last year, September at last year minus 10%. Forecast bars are live from Wed 8/19.</span></div>
+      <div><span class="st open">OPEN</span><span>Budget Variance (Tue) and Schedule Variance (Thu) report dispatches confirmed.</span></div>
+    </div>
+  </div>
+
+  <!-- CASH TRAIL -->
+  <div class="card">
+    <h2>Cash trail — the two places money can go missing</h2>
+    <table>
+      <tr><th>Checkpoint</th><th>What proves it</th><th class="c">Status</th></tr>
+      <tr><td class="duty">Register → report</td><td>Counted cash vs what the POS expected (over/short within $20, every paid out logged with a receipt)</td><td class="c"><span class="cell pend">awaiting first log</span></td></tr>
+      <tr><td class="duty">Report → bank</td><td>One deposit per day, reconciled against the bank statement (no lumping)</td><td class="c"><span class="cell pend">awaiting first log</span></td></tr>
+    </table>
+    <p style="font-size:12px;color:var(--ink-3);margin-top:8px">Tracked separately on purpose: a shortage at the register and a shortage between the safe and the bank are different problems with different fixes. When both checkpoints prove daily, missing cash stops being a mystery.</p>
+  </div>
+
+  <!-- SALES CHART -->
+  <div class="card">
+    <h2>Sales — current week — actual vs forecast vs last year</h2>
+    <div class="legend">
+      <span><span class="key" style="background:var(--s1)"></span>Actual</span>
+      <span><span class="key" style="background:var(--s2)"></span>Forecast</span>
+      <span><span class="key line" style="background:var(--s3)"></span>Last year (same weekday)</span>
+    </div>
+    <div id="chart"></div>
+  </div>
+
+  <!-- DUTY SCORECARD -->
+  <div class="card">
+    <h2>Duty scorecard — week of Aug 17–23</h2>
+    <table id="grid"></table>
+  </div>
+
+  <!-- CADENCE TIMERS -->
+  <div class="card">
+    <h2>Cadence timers — flags fire when a cycle passes without a check-off</h2>
+    <div id="meters"></div>
+  </div>
+
+  <footer>RSP Owner Alerts · audited daily at 3:00 AM Phoenix (6:00 AM restaurant time) from the Daily Manager Log · flags drafted in Fred's email for his review, only when something is wrong · Budget Variance Tuesdays · Schedule Variance Thursdays</footer>
+</div>
+<div class="tooltip" id="tip"></div>
+
+<script>
+(function(){
+  "use strict";
+  /* ============ DATA (updated by the auditor each morning) ============ */
+  const week = {
+    days:["Mon 8/17","Tue 8/18","Wed 8/19","Thu 8/20","Fri 8/21","Sat 8/22","Sun 8/23"],
+    actual:[2301.97,2204.32,null,null,null,null,null],
+    forecast:[null,null,4871.90,3790.82,5249.95,5916.39,6228.51],
+    ly:[null,3604.70,4871.90,3790.82,5249.95,5916.39,6228.51]
+  };
+  const duties=[
+    ["Manager log completed",             ["miss","miss","pend","pend","pend","pend","pend"]],
+    ["Cash deposit counted &amp; entered (not the POS number)",["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Deposit banked daily (no lumping)", ["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Paid outs logged w/ receipts",      ["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Purchase allotment / POs in guidelines",["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Orders >$500 over PA owner-approved",["pend","pend","pend","pend","pend","pend","pend"]],
+    ["POs placed &amp; hanging",          ["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Recipe card on every special / POS button",["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Ops checklists complete (digital)", ["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Prep sheets used",                  ["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Pre-shift held (form in binder)",   ["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Unpaid-invoice audit",              ["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Key item report",                   ["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Auto: sales posted (Toast)",        ["ok","ok","pend","pend","pend","pend","pend"]],
+    ["Auto: invoices uploaded",           ["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Auto: price increases &le;5%",      ["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Auto: over/short within $20",       ["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Auto: labor on budget (reverse labor)",["pend","pend","pend","pend","pend","pend","pend"]],
+    ["Mon: usage + ideal cost + waste sheets",["pend","na","na","na","na","na","na"]],
+    ["Tue: budget variance analyzed",     ["na","pend","na","na","na","na","na"]],
+    ["Wed: training plan + mgr meeting",  ["na","na","pend","na","na","na","na"]],
+    ["Thu: $/labor hr + SVR + approve schedules",["na","na","na","pend","na","na","na"]]
+  ];
+  /* days since last check-off vs allowed cycle */
+  const meters=[
+    ["End-of-week inventories",3,7,"last full count Sun 8/16"],
+    ["Weekly training planned",0,7,"baseline starts with first log"],
+    ["Weekly manager meeting",0,7,"baseline starts with first log"],
+    ["Restaurant walkthrough",0,14,"baseline starts with first log"],
+    ["Equipment inspection",0,31,"baseline starts with first log"],
+    ["Employee availabilities updated",0,31,"monthly; baseline starts with first log"],
+    ["Auto pars regenerated",0,42,"baseline starts with first log"],
+    ["Next month's forecast (Oct due Sep 20)",0,31,"September entered Aug 19, a day early"]
+  ];
+
+  const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const fmt=v=>"$"+Math.round(v).toLocaleString();
+  const hasData = week.actual.some(v=>v!=null) || week.forecast.some(v=>v!=null);
+
+  /* ============ CHART (grouped bars + LY line, null-safe) ============ */
+  if(!hasData){
+    document.getElementById("chart").innerHTML =
+      '<div style="padding:34px 10px;text-align:center;color:var(--ink-3);font-size:13px">No sales data yet — the chart fills in daily once the manager log dispatches and a forecast is on file.</div>';
+  } else {
+    const W=1000,H=320,padL=56,padR=14,padT=16,padB=34;
+    const plotW=W-padL-padR, plotH=H-padT-padB;
+    const allVals=[...week.actual,...week.forecast,...week.ly].filter(v=>v!=null);
+    const maxV=Math.max(6000,Math.ceil(Math.max.apply(null,allVals)*1.15/1000)*1000), yMax=maxV;
+    const x=i=>padL+plotW*(i+0.5)/7;
+    const y=v=>padT+plotH*(1-v/yMax);
+    let s='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;height:auto" role="img" aria-label="Daily sales: actual vs forecast vs last year">';
+    for(let g=0;g<=3;g++){const v=g*yMax/3,gy=y(v);
+      s+='<line x1="'+padL+'" y1="'+gy+'" x2="'+(W-padR)+'" y2="'+gy+'" stroke="'+(v===0?css('--baseline'):css('--grid'))+'" stroke-width="1"/>';
+      s+='<text x="'+(padL-8)+'" y="'+(gy+4)+'" text-anchor="end" font-size="11" fill="'+css('--ink-3')+'" style="font-variant-numeric:tabular-nums">'+Math.round(v/1000)+(v?'k':'')+'</text>';
+    }
+    const bw=22, gap=2;
+    week.days.forEach((d,i)=>{
+      const cx=x(i);
+      if(week.actual[i]!=null){
+        const bh=plotH*week.actual[i]/yMax;
+        s+='<rect class="hit" data-i="'+i+'" x="'+(cx-bw-gap/2)+'" y="'+(y(week.actual[i]))+'" width="'+bw+'" height="'+bh+'" rx="4" fill="'+css('--s1')+'"/>';
+        s+='<rect x="'+(cx-bw-gap/2)+'" y="'+(H-padB-4)+'" width="'+bw+'" height="4" fill="'+css('--s1')+'"/>';
+      }
+      if(week.forecast[i]!=null){
+        const fh=plotH*week.forecast[i]/yMax;
+        s+='<rect class="hit" data-i="'+i+'" x="'+(cx+gap/2)+'" y="'+(y(week.forecast[i]))+'" width="'+bw+'" height="'+fh+'" rx="4" fill="'+css('--s2')+'"'+(week.actual[i]==null?' opacity="0.55"':'')+'/>';
+        s+='<rect x="'+(cx+gap/2)+'" y="'+(H-padB-4)+'" width="'+bw+'" height="4" fill="'+css('--s2')+'"'+(week.actual[i]==null?' opacity="0.55"':'')+'/>';
+      }
+      s+='<text x="'+cx+'" y="'+(H-10)+'" text-anchor="middle" font-size="11.5" fill="'+css('--ink-2')+'">'+d.split(" ")[0]+'</text>';
+    });
+    let path="",started=false;
+    week.ly.forEach((v,i)=>{ if(v!=null){ path+=(started?"L":"M")+x(i)+" "+y(v)+" "; started=true; }});
+    if(path)s+='<path d="'+path+'" fill="none" stroke="'+css('--s3')+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+    week.ly.forEach((v,i)=>{ if(v!=null){
+      s+='<circle class="hit" data-i="'+i+'" cx="'+x(i)+'" cy="'+y(v)+'" r="6" fill="'+css('--s3')+'" stroke="'+css('--surface-1')+'" stroke-width="2"/>';
+    }});
+    let li=-1; week.actual.forEach((v,i)=>{if(v!=null)li=i;});
+    if(li>=0)s+='<text x="'+(x(li)-bw/2-gap/2)+'" y="'+(y(week.actual[li])-7)+'" text-anchor="middle" font-size="11.5" font-weight="650" fill="'+css('--ink-1')+'" style="font-variant-numeric:tabular-nums">'+fmt(week.actual[li])+'</text>';
+    s+='</svg>';
+    document.getElementById("chart").innerHTML=s;
+
+    const tip=document.getElementById("tip");
+    document.getElementById("chart").addEventListener("mousemove",e=>{
+      const t=e.target.closest(".hit");
+      if(!t){tip.style.opacity=0;return;}
+      const i=+t.dataset.i;
+      let h='<div class="t-day">'+week.days[i]+'</div>';
+      if(week.actual[i]!=null)h+='<div class="t-row"><span>Actual</span><b>'+fmt(week.actual[i])+'</b></div>';
+      if(week.forecast[i]!=null)h+='<div class="t-row"><span>Forecast</span><b>'+fmt(week.forecast[i])+'</b></div>';
+      if(week.ly[i]!=null)h+='<div class="t-row"><span>Last year</span><b>'+fmt(week.ly[i])+'</b></div>';
+      if(week.actual[i]!=null&&week.forecast[i]!=null)h+='<div class="t-row"><span>vs forecast</span><b>'+((week.actual[i]/week.forecast[i]-1)*100).toFixed(1)+'%</b></div>';
+      tip.innerHTML=h;
+      tip.style.left=Math.min(e.clientX+14,window.innerWidth-250)+"px";
+      tip.style.top=(e.clientY+12)+"px";
+      tip.style.opacity=1;
+    });
+    document.getElementById("chart").addEventListener("mouseleave",()=>tip.style.opacity=0);
+  }
+
+  /* ============ DUTY GRID ============ */
+  const dayHdr=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  let g="<tr><th>Duty</th>"+dayHdr.map(d=>"<th class='c'>"+d+"</th>").join("")+"</tr>";
+  const cell=v=>{
+    if(v==="ok")return"<span class='cell ok'>✓ OK</span>";
+    if(v==="flag")return"<span class='cell flag'>⚑ FLAG</span>";
+    if(v==="na")return"<span class='cell na'>—</span>";
+    if(v==="miss")return"<span class='cell flag'>? MISSING</span>";
+    if(v==="pend")return"<span class='cell pend'>·</span>";
+    return"<span class='cell pend'></span>";
+  };
+  duties.forEach(r=>{ g+="<tr><td class='duty'>"+r[0]+"</td>"+r[1].map(v=>"<td class='c'>"+cell(v)+"</td>").join("")+"</tr>"; });
+  document.getElementById("grid").innerHTML=g;
+
+  /* ============ CADENCE METERS ============ */
+  let m="";
+  meters.forEach(r=>{
+    const[label,used,total,note]=r;
+    const pct=Math.min(100,used/total*100);
+    const fill=pct>=100?css('--critical'):pct>=75?css('--warn'):css('--s1');
+    m+='<div class="meter-row"><div class="meter-label">'+label+'</div>'
+      +'<div class="meter"><div class="fill" style="width:'+pct+'%;background:'+fill+'"></div></div>'
+      +'<div class="meter-days">'+(note?note+" · ":"")+used+' / '+total+' days</div></div>';
+  });
+  document.getElementById("meters").innerHTML=m;
+})();
+</script>
+</body>
+</html>
