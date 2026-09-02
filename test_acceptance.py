@@ -4,14 +4,13 @@ Rolls state back to how it stood before the 09-01 dispatch was read, runs
 the engine against the real dispatch, and asserts the conclusions.
 """
 import copy, json, sys, os
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import parse, rules
-
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+sys.path.insert(0, os.path.dirname(HERE))
+sys.path.insert(0, HERE)
+import parse, paths, rules
 
-state = json.load(open(os.path.join(ROOT, "data/state.json")))
-ly = json.load(open(os.path.join(ROOT, "data/ly_sales.json")))
+state = json.load(open(paths.find_file("state.json")))
+ly = json.load(open(paths.find_file("ly_sales.json")))
 
 # --- rewind to the pre-09-01 position -------------------------------------
 s = copy.deepcopy(state)
@@ -25,7 +24,7 @@ s["cash"]["counted_deposits"] = [c for c in s["cash"]["counted_deposits"] if c["
 s["open_flags"]["price_increases"] = [p for p in s["open_flags"]["price_increases"] if p["date"] < "2026-09-01"]
 s["actuals_gross"].pop("2026-09-01", None)
 
-p = parse.parse(open(os.path.join(HERE, "fixture_2026-09-01.html")).read())
+p = parse.parse(open(paths.find_file("fixture_2026-09-01.html", extra=(HERE,))).read())
 flags, facts, s2 = rules.evaluate(p, s, ly, today="2026-09-02")
 
 codes = [f["code"] for f in flags]

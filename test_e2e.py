@@ -1,10 +1,11 @@
 import copy, json, os, sys
-HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
-sys.path.insert(0, ROOT)
-import parse, rules, render, verify
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.dirname(HERE))
+sys.path.insert(0, HERE)
+import parse, paths, rules, render, verify
 
-state = json.load(open(os.path.join(ROOT, "data/state.json")))
-ly = json.load(open(os.path.join(ROOT, "data/ly_sales.json")))
+state = json.load(open(paths.find_file("state.json")))
+ly = json.load(open(paths.find_file("ly_sales.json")))
 s = copy.deepcopy(state)
 s["streaks"]["early_dispatch_days"] = [x for x in s["streaks"]["early_dispatch_days"] if x < "2026-09-01"]
 s["streaks"]["invoice_log_empty_run"] = [x for x in s["streaks"]["invoice_log_empty_run"] if x < "2026-09-01"]
@@ -14,7 +15,7 @@ s["cash"]["counted_deposits"] = [c for c in s["cash"]["counted_deposits"] if c["
 s["open_flags"]["price_increases"] = [p for p in s["open_flags"]["price_increases"] if p["date"] < "2026-09-01"]
 s["actuals_gross"].pop("2026-09-01", None)
 
-p = parse.parse(open(os.path.join(HERE, "fixture_2026-09-01.html")).read())
+p = parse.parse(open(paths.find_file("fixture_2026-09-01.html", extra=(HERE,))).read())
 flags, facts, s2 = rules.evaluate(p, s, ly, today="2026-09-02")
 cleared = [
  {"sev":"good","title":"The manager log was answered in full.","detail":"All 9 questions answered by Joseph Raven."},

@@ -11,11 +11,10 @@ import zoneinfo
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-import fetch_mail, narrate, parse, render, rules, verify   # noqa: E402
+import fetch_mail, narrate, parse, paths, render, rules, verify   # noqa: E402
 
-ROOT = os.path.dirname(os.path.dirname(HERE))
-STATE = os.path.join(HERE, "data", "state.json")
-LY = os.path.join(HERE, "data", "ly_sales.json")
+STATE = paths.find_file("state.json")
+LY = paths.find_file("ly_sales.json")
 
 
 def summary(text):
@@ -47,6 +46,7 @@ def main():
         return 0
 
     log_date = os.environ.get("LOG_DATE") or (now.date() - dt.timedelta(days=1)).isoformat()
+    ROOT = paths.repo_root(state["config"]["slug"])
     out_path = os.path.join(ROOT, state["config"]["slug"], "index.html")
     output("log_date", log_date)
     summary("## Vivio's board, log date %s (run %s local)" % (log_date, now.strftime("%Y-%m-%d %H:%M")))
