@@ -1,0 +1,72 @@
+name: Vivio's board update
+
+on:
+  schedule:
+    - cron: "0 11 * * *"
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+    inputs:
+      log_date:
+        description: "Log date to audit (YYYY-MM-DD). Blank means yesterday, Detroit time."
+        required: false
+      force:
+        description: "Run even if the local hour is not 7"
+        required: false
+        default: "true"
+      dry_run:
+        description: "Build and verify but do not commit"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vivios-board
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run the audit
+        id: audit
+        env:
+          GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS || vars.GMAIL_ADDRESS || secrets.MAIL_USER || vars.MAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          LOG_DATE: ${{ github.event.inputs.log_date }}
+          FORCE_RUN: ${{ github.event.inputs.force }}
+        run: python run.py
+
+      - name: Verify the page before it can reach the client
+        run: python verify.py vcfe08ecbfcfd412/index.html
+
+      - name: Run the acceptance test
+        run: python test_acceptance.py
+
+      - name: Commit and publish
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          git config user.name  "board-bot"
+          git config user.email "board-bot@users.noreply.github.com"
+          git add vcfe08ecbfcfd412/index.html state.json
+          if git diff --staged --quiet; then
+            echo "No change to publish."
+          else
+            git commit -m "Vivio's board refresh ${{ steps.audit.outputs.log_date }}"
+            git push
+          fi
+
+      - name: Summary
+        if: always()
+        run: cat "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
