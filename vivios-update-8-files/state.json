@@ -1,0 +1,257 @@
+{
+  "_comment": "Carried state for the Vivio's Warren owner board. Seeded 2026-09-02 from the audit history. Each workflow run reads this, updates it, and commits it back. Without it a headless run loses every streak, backlog and prior finding, because none of that appears in any single email.",
+  "seeded": "2026-09-02",
+  "last_log_date_audited": "2026-09-01",
+  "config": {
+    "slug": "vcfe08ecbfcfd412",
+    "mail_user": "",
+    "mail_user_note": "Last resort only. Leave empty and supply the address as a repository secret or variable named GMAIL_ADDRESS or MAIL_USER. This repo is PUBLIC, so anything put here is visible to anyone.",
+    "timezone": "America/Detroit",
+    "labor_target_pct": 21.05,
+    "forecast_basis": "LY_MINUS_20",
+    "forecast_factor": 0.8,
+    "forecast_basis_since": "2026-08-26",
+    "over_short_tolerance": 20.0,
+    "price_increase_pct": 5.0,
+    "price_decrease_note_pct": -10.0,
+    "schedule_variance_threshold": 200.0,
+    "sales_miss_forecast_pct": -10.0,
+    "sales_miss_ly_pct": -10.0,
+    "trailing_weekday_window": 4,
+    "banned_strings": [
+      "claude",
+      "anthropic"
+    ],
+    "banned_chars": [
+      "\u2014",
+      "\u2013"
+    ]
+  },
+  "actuals_gross": {
+    "2026-08-19": 3041.0,
+    "2026-08-20": 2638.49,
+    "2026-08-21": 5958.32,
+    "2026-08-22": 4308.03,
+    "2026-08-23": 3253.72,
+    "2026-08-24": 1976.95,
+    "2026-08-25": 3258.94,
+    "2026-08-26": 2367.14,
+    "2026-08-27": 3613.42,
+    "2026-08-28": 7462.3,
+    "2026-08-29": 4900.06,
+    "2026-08-30": 3572.7,
+    "2026-08-31": 2644.96
+  },
+  "actuals_note": "2026-08-24 and 2026-08-25 are derived: the corrected seven day BVR total of 27151.51 less the four known days, split using the known Mon-Wed subtotal of 7603.03. The split reconciles to the penny against a trailing-4 Monday of 2094.97. 2026-09-01 is absent because its EOD had not posted at dispatch.",
+  "streaks": {
+    "blank_manager_log": {
+      "confirmed_days": [
+        "2026-08-25",
+        "2026-08-26",
+        "2026-08-27",
+        "2026-08-28",
+        "2026-08-29",
+        "2026-08-30",
+        "2026-08-31"
+      ],
+      "broken_on": "2026-09-01",
+      "note": "2026-08-31 was closed out N/A by an RSP staff account, which counts as blank. An N/A is not an answer and the crew is never scored for an RSP side entry."
+    },
+    "early_dispatch_days": [
+      "2026-08-21",
+      "2026-08-23",
+      "2026-08-25",
+      "2026-08-27",
+      "2026-08-28",
+      "2026-08-29",
+      "2026-08-30",
+      "2026-08-31",
+      "2026-09-01"
+    ],
+    "invoice_log_empty_run": [
+      "2026-08-28",
+      "2026-08-29",
+      "2026-08-30",
+      "2026-08-31",
+      "2026-09-01"
+    ],
+    "paid_out_empty_run": [],
+    "bvr_waste_zero_weeks": 2
+  },
+  "cash": {
+    "unentered_deposit_series": [
+      440.19,
+      709.3,
+      1190.25,
+      1737.87,
+      251.4
+    ],
+    "counted_deposits": [
+      {
+        "date": "2026-08-22",
+        "amount": 1114.0,
+        "counted_by": "Derek",
+        "reached_system": "log",
+        "proved": "0.10"
+      },
+      {
+        "date": "2026-08-31",
+        "amount": 269.0,
+        "counted_by": "Hannah and Konnie",
+        "reached_system": "via Fred",
+        "proved": "17.60 over on 251.40 expected"
+      },
+      {
+        "date": "2026-09-01",
+        "amount": 734.0,
+        "counted_by": "Joseph Raven",
+        "reached_system": "log",
+        "proved": "pending EOD"
+      }
+    ],
+    "unexplained_over_short": [
+      {
+        "date": "2026-08-24",
+        "amount": -547.71
+      }
+    ],
+    "expected_deposit_formula": "Total Cash minus Proof, before any deposit is entered",
+    "recurring_cash_entertainment": {
+      "Mon": 150.0,
+      "Tue": 150.0,
+      "Wed": 150.0,
+      "Fri": 350.0,
+      "note": "Payee field reads only V. Receipt field usually holds a date."
+    },
+    "unentered_deposit_dates": [
+      "2026-08-19",
+      "2026-08-20",
+      "2026-08-21",
+      "2026-08-30",
+      "2026-08-31"
+    ]
+  },
+  "open_flags": {
+    "price_increases": [
+      {
+        "date": "2026-08-21",
+        "vendor": "GFS",
+        "product": "Lettuce Romaine",
+        "old": 3.0,
+        "new": 23.25,
+        "pct": 675.0,
+        "note": "Two offsetting same day changes, probable mis-key, never confirmed against a live price"
+      },
+      {
+        "date": "2026-08-27",
+        "vendor": "Petitpren",
+        "product": "Bud Light 20 Lse Btls",
+        "pct": 11.02
+      },
+      {
+        "date": "2026-08-27",
+        "vendor": "Petitpren",
+        "product": "RB Sugar Free",
+        "pct": 8.97
+      },
+      {
+        "date": "2026-08-31",
+        "vendor": "Atlas",
+        "product": "Cornerstone Sour Cream (Real)",
+        "old": 31.22,
+        "new": 35.65,
+        "pct": 14.19
+      }
+    ],
+    "new_products_baseline": 11,
+    "new_products_seen": [],
+    "new_products_no_location": 11,
+    "new_products_note": "48 purchased lines showed 0.000 on both counts last week, 2148.72. Largest: Bells Hopslam keg 239.00, Cheese Blend 106.50, Furlan Prosecco 102.00, Plates 10.25in 82.94, Bud Light 20 loose 80.60, Shorts Honey Crisp keg 75.00",
+    "po_back_confirmation": true,
+    "usage_report_no_ideal": true,
+    "chicken_93lb_unreconciled": true,
+    "inventory_data_quality": {
+      "negative_usage_lines": 81,
+      "negative_usage_value": -1888.67,
+      "never_counted_lines": 48,
+      "never_counted_value": 2148.72,
+      "identical_count_lines": 77,
+      "unit_mismatch_lines": 12,
+      "total_reported_usage": 6843.99
+    }
+  },
+  "config_gaps": {
+    "daily_duties_table_absent": true,
+    "weekday_and_cadence_tables_zero_rows": true,
+    "availabilities_not_in_cadence_group": true,
+    "dispatch_precedes_eod": true,
+    "drive_august_forecast_sheet_stale": true
+  },
+  "cadence": {
+    "walkthrough_14d": {
+      "cycle_start": "2026-08-19",
+      "last_yes": null
+    },
+    "equipment_31d": {
+      "cycle_start": "2026-08-19",
+      "last_yes": null
+    },
+    "availabilities_monthly": {
+      "cycle_start": "2026-08-19",
+      "last_yes": null,
+      "scored": false
+    },
+    "auto_pars_42d": {
+      "cycle_start": "2026-08-19",
+      "last_yes": null
+    },
+    "next_month_forecast": {
+      "on_file_through": "2026-09",
+      "due_day": 20
+    }
+  },
+  "weekly": {
+    "bvr_week": "2026-08-24/2026-08-30",
+    "bvr_gross": 27151.51,
+    "bvr_seven_day_verified": true,
+    "prime_cost_pct": 62.07,
+    "prime_cost_target_pct": 60.46,
+    "prime_cost_variance": 438.34,
+    "total_cogs_pct": 23.14,
+    "total_cogs_target_pct": 24.21,
+    "food_cogs_pct": 29.24,
+    "hourly_payroll": 6360.92,
+    "hourly_payroll_pct": 23.43,
+    "schedule_variance_week": "2026-08-31/2026-09-06",
+    "schedule_variance_printed": 936.32,
+    "schedule_variance_real": -578.49,
+    "schedule_variance_broken_line": "Hourly Manager-Management, 1514.81 budgeted over 66.82 hrs against 0.00 and 0.00 hrs"
+  },
+  "flag_count_history": [
+    {
+      "date": "2026-08-29",
+      "high": 6,
+      "medium": 8
+    },
+    {
+      "date": "2026-08-30",
+      "high": 7,
+      "medium": 12
+    },
+    {
+      "date": "2026-08-31",
+      "high": 9,
+      "medium": 13
+    },
+    {
+      "date": "2026-09-01",
+      "high": 6,
+      "medium": 14
+    },
+    {
+      "date": "2026-09-02",
+      "high": 7,
+      "medium": 15
+    }
+  ]
+}
