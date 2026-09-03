@@ -1,7 +1,7 @@
 {
   "_comment": "Carried state for the Vivio's Warren owner board. Seeded 2026-09-02 from the audit history. Each workflow run reads this, updates it, and commits it back. Without it a headless run loses every streak, backlog and prior finding, because none of that appears in any single email.",
   "seeded": "2026-09-02",
-  "last_log_date_audited": "2026-09-01",
+  "last_log_date_audited": "2026-09-02",
   "config": {
     "slug": "vcfe08ecbfcfd412",
     "mail_user": "",
@@ -55,7 +55,8 @@
         "2026-08-31"
       ],
       "broken_on": "2026-09-01",
-      "note": "2026-08-31 was closed out N/A by an RSP staff account, which counts as blank. An N/A is not an answer and the crew is never scored for an RSP side entry."
+      "note": "2026-08-31 was closed out N/A by an RSP staff account, which counts as blank. An N/A is not an answer and the crew is never scored for an RSP side entry.",
+      "pending": "2026-09-02"
     },
     "early_dispatch_days": [
       "2026-08-21",
@@ -66,16 +67,20 @@
       "2026-08-29",
       "2026-08-30",
       "2026-08-31",
-      "2026-09-01"
+      "2026-09-01",
+      "2026-09-02"
     ],
     "invoice_log_empty_run": [
       "2026-08-28",
       "2026-08-29",
       "2026-08-30",
       "2026-08-31",
-      "2026-09-01"
+      "2026-09-01",
+      "2026-09-02"
     ],
-    "paid_out_empty_run": [],
+    "paid_out_empty_run": [
+      "2026-09-02"
+    ],
     "bvr_waste_zero_weeks": 2
   },
   "cash": {
@@ -156,7 +161,7 @@
         "pct": 14.19
       }
     ],
-    "new_products_no_location": 11,
+    "new_products_no_location": 20,
     "new_products_note": "48 purchased lines showed 0.000 on both counts last week, 2148.72. Largest: Bells Hopslam keg 239.00, Cheese Blend 106.50, Furlan Prosecco 102.00, Plates 10.25in 82.94, Bud Light 20 loose 80.60, Shorts Honey Crisp keg 75.00",
     "po_back_confirmation": true,
     "usage_report_no_ideal": true,
@@ -243,6 +248,11 @@
       "date": "2026-09-02",
       "high": 7,
       "medium": 15
+    },
+    {
+      "date": "2026-09-03",
+      "high": 6,
+      "medium": 5
     }
   ]
 }
