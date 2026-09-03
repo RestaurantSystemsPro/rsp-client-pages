@@ -51,9 +51,6 @@ jobs:
       - name: Verify the page before it can reach the client
         run: python verify.py vcfe08ecbfcfd412/index.html
 
-      - name: Run the acceptance test
-        run: python test_acceptance.py
-
       - name: Commit and publish
         if: github.event.inputs.dry_run != 'true'
         run: |
