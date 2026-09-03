@@ -40,7 +40,8 @@
     "2026-08-28": 7462.3,
     "2026-08-29": 4900.06,
     "2026-08-30": 3572.7,
-    "2026-08-31": 2644.96
+    "2026-08-31": 2644.96,
+    "2026-09-02": 4946.63
   },
   "actuals_note": "2026-08-24 and 2026-08-25 are derived: the corrected seven day BVR total of 27151.51 less the four known days, split using the known Mon-Wed subtotal of 7603.03. The split reconciles to the penny against a trailing-4 Monday of 2094.97. 2026-09-01 is absent because its EOD had not posted at dispatch.",
   "streaks": {
@@ -70,14 +71,7 @@
       "2026-09-01",
       "2026-09-02"
     ],
-    "invoice_log_empty_run": [
-      "2026-08-28",
-      "2026-08-29",
-      "2026-08-30",
-      "2026-08-31",
-      "2026-09-01",
-      "2026-09-02"
-    ],
+    "invoice_log_empty_run": [],
     "paid_out_empty_run": [
       "2026-09-02"
     ],
@@ -161,7 +155,7 @@
         "pct": 14.19
       }
     ],
-    "new_products_no_location": 20,
+    "new_products_no_location": 31,
     "new_products_note": "48 purchased lines showed 0.000 on both counts last week, 2148.72. Largest: Bells Hopslam keg 239.00, Cheese Blend 106.50, Furlan Prosecco 102.00, Plates 10.25in 82.94, Bud Light 20 loose 80.60, Shorts Honey Crisp keg 75.00",
     "po_back_confirmation": true,
     "usage_report_no_ideal": true,
@@ -253,6 +247,11 @@
       "date": "2026-09-03",
       "high": 6,
       "medium": 5
+    },
+    {
+      "date": "2026-09-03",
+      "high": 8,
+      "medium": 3
     }
   ]
 }
