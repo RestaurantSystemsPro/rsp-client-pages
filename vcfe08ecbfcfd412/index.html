@@ -6,386 +6,348 @@
 <title>Vivio's Warren Owner Dashboard</title>
 <style>
 :root{
---ink:#12171d; --ink2:#41505f; --ink3:#6c7c8c; --line:#dfe6ee; --bg:#f4f7fa; --card:#ffffff;
---brand:#1f4e79; --brand2:#2e6e9e; --good:#0f7a4d; --goodbg:#e6f5ee;
---warn:#8a5a00; --warnbg:#fdf3e0; --bad:#a4262c; --badbg:#fdeded; --neutbg:#eef3f8;
+  --ink:#12202e; --muted:#5b6b7c; --line:#dfe6ee; --bg:#f4f7fa; --card:#ffffff;
+  --brand:#1f5c8b; --brand2:#2e7fb8; --hi:#b3261e; --hiBg:#fdecea; --med:#9a6400; --medBg:#fff6e5;
+  --ok:#1e7a4d; --okBg:#e8f6ee; --na:#7a8794; --naBg:#eef1f4;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 .wrap{max-width:1180px;margin:0 auto;padding:20px 18px 60px}
-header.top{background:linear-gradient(135deg,#1f4e79,#2e6e9e);color:#fff;border-radius:14px;padding:22px 24px;margin-bottom:18px}
-header.top .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.82;font-weight:700}
-header.top h1{margin:6px 0 4px;font-size:27px;line-height:1.2;font-weight:800;letter-spacing:-.01em}
-header.top .sub{font-size:14px;opacity:.93}
-header.top .by{margin-top:12px;font-size:12px;opacity:.8;border-top:1px solid rgba(255,255,255,.25);padding-top:10px}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin-bottom:18px}
-.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 16px}
-.tile .lab{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);font-weight:700}
-.tile .big{font-size:26px;font-weight:800;margin:5px 0 2px;letter-spacing:-.02em}
-.tile .note{font-size:12.5px;color:var(--ink2)}
-.pill{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:99px;letter-spacing:.03em}
-.p-good{background:var(--goodbg);color:var(--good)} .p-bad{background:var(--badbg);color:var(--bad)}
-.p-warn{background:var(--warnbg);color:var(--warn)} .p-neut{background:var(--neutbg);color:var(--brand)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:16px}
-.card h2{margin:0 0 3px;font-size:17px;font-weight:800;letter-spacing:-.01em}
-.card .lede{margin:0 0 14px;font-size:13.5px;color:var(--ink2)}
-.card h3{margin:18px 0 8px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);font-weight:800}
-.act{background:#fff;border:1px solid #f0c9c9;border-left:5px solid var(--bad);border-radius:12px;padding:18px 20px;margin-bottom:16px}
-.act h2{color:var(--bad)}
-.tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{border-collapse:collapse;width:100%;min-width:520px;font-size:13.5px}
-th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
-th{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);font-weight:800;background:#f7fafc}
-td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
-tr.tot td{font-weight:800;background:#f7fafc;border-top:2px solid var(--line)}
-.pos{color:var(--bad);font-weight:700} .neg{color:var(--good);font-weight:700}
-.flag{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
-.flag:last-child{border-bottom:none}
+header.top{background:linear-gradient(180deg,var(--brand) 0%,#17486d 100%);color:#fff;border-radius:12px;padding:22px 24px;margin-bottom:18px}
+header.top .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.82}
+header.top h1{margin:6px 0 4px;font-size:26px;line-height:1.2}
+header.top .sub{font-size:14px;opacity:.9}
+header.top .by{margin-top:12px;font-size:12px;opacity:.8;border-top:1px solid rgba(255,255,255,.22);padding-top:10px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:18px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.tile .lab{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile .big{font-size:30px;font-weight:700;margin:6px 0 2px;letter-spacing:-.5px}
+.tile .row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);padding:3px 0;border-top:1px dotted var(--line)}
+.tile .row b{color:var(--ink);font-weight:600}
+.pos{color:var(--ok)} .neg{color:var(--hi)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:18px;overflow:hidden}
+.card>h2{margin:0;padding:13px 18px;font-size:14px;letter-spacing:.08em;text-transform:uppercase;background:#eef3f8;border-bottom:1px solid var(--line);color:var(--brand)}
+.card .body{padding:16px 18px}
+.card .body p{margin:0 0 10px}
+.card .body p:last-child{margin-bottom:0}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:13.5px}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#f7fafc;font-weight:600;color:var(--muted);font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.p-hi{background:var(--hiBg);color:var(--hi)} .p-med{background:var(--medBg);color:var(--med)}
+.p-ok{background:var(--okBg);color:var(--ok)} .p-na{background:var(--naBg);color:var(--na)}
+.flag{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.flag:first-child{border-top:0;padding-top:0}
 .flag .sev{flex:0 0 62px}
-.flag .body{flex:1;min-width:0}
-.flag .ttl{font-weight:700;font-size:14px;margin-bottom:2px}
-.flag .dsc{font-size:13px;color:var(--ink2)}
-.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
-.kv{display:flex;justify-content:space-between;gap:12px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
-.kv:last-child{border-bottom:none}
-.kv .k{color:var(--ink2)} .kv .v{font-weight:700;font-variant-numeric:tabular-nums}
+.flag .txt strong{display:block;margin-bottom:2px}
+.flag .txt span{color:var(--muted);font-size:13.5px}
 .meter{margin-bottom:12px}
 .meter .mh{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
-.bar{height:8px;background:#e9eff5;border-radius:99px;overflow:hidden}
-.bar i{display:block;height:100%;border-radius:99px}
-.dot{display:inline-block;width:9px;height:9px;border-radius:99px;margin-right:6px;vertical-align:middle}
-.d-ok{background:var(--good)} .d-flag{background:var(--bad)} .d-na{background:#c3ced9}
-ul.tight{margin:8px 0 0;padding-left:18px} ul.tight li{margin-bottom:6px;font-size:13.5px;color:var(--ink2)}
-footer{text-align:center;font-size:12px;color:var(--ink3);padding-top:8px}
-@media (max-width:640px){header.top h1{font-size:22px}.tile .big{font-size:22px}}
+.meter .bar{height:8px;background:#e6ecf2;border-radius:5px;overflow:hidden}
+.meter .fill{height:100%;border-radius:5px;background:var(--brand2)}
+.meter .fill.over{background:var(--hi)}
+.note{font-size:12.5px;color:var(--muted);margin-top:10px;padding-top:10px;border-top:1px dotted var(--line)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+footer{color:var(--muted);font-size:12px;text-align:center;padding-top:8px}
+@media (max-width:620px){header.top h1{font-size:21px}.tile .big{font-size:25px}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <header class="top">
-  <div class="eyebrow">Owner Dashboard</div>
+  <div class="eyebrow">Owner Alerts</div>
   <h1>Vivio's Warren</h1>
-  <div class="sub">Updated through Monday, September 7, 2026 (Labor Day)</div>
-  <div class="by">Prepared by Restaurant Systems Pro &nbsp;&middot;&nbsp; Owner: Mijo Alanis &nbsp;&middot;&nbsp; Manager: Steve Alanis</div>
+  <div class="sub">Updated through Tuesday, September 8, 2026. Week of Monday, September 7.</div>
+  <div class="by">Prepared for Mijo Alanis and Steve Alanis by Restaurant Systems Pro. Reviewed daily against the manager log, the end of day, the invoice and paid out logs, purchasing, pricing and the reverse labor report.</div>
 </header>
 
 <div class="tiles">
   <div class="tile">
-    <div class="lab">Monday sales</div>
-    <div class="big">$3,220.52</div>
-    <div class="note"><span class="pill p-good">+3.4% vs plan</span> &nbsp;$3,115.21 planned</div>
+    <div class="lab">Tuesday gross sales</div>
+    <div class="big">$2,400.40</div>
+    <div class="row"><span>Plan</span><b>$2,955.36 <span class="neg">-18.78%</span></b></div>
+    <div class="row"><span>Same day last year</span><b>$2,877.29 <span class="neg">-16.57%</span></b></div>
+    <div class="row"><span>Week to date, 2 days</span><b>$5,620.92 <span class="neg">-7.41%</span></b></div>
   </div>
   <div class="tile">
-    <div class="lab">Vs a normal Monday</div>
-    <div class="big">+42.7%</div>
-    <div class="note">Last four Mondays averaged $2,256.85</div>
+    <div class="lab">Prime cost, week ended 09-06</div>
+    <div class="big">66.5%</div>
+    <div class="row"><span>Target</span><b>63.10%</b></div>
+    <div class="row"><span>Dollars over</span><b class="neg">$891.31</b></div>
+    <div class="row"><span>Before beverage adjustment</span><b>93.44%</b></div>
   </div>
   <div class="tile">
-    <div class="lab">Prime cost, week to 09-06</div>
-    <div class="big">93.44%</div>
-    <div class="note"><span class="pill p-bad">$7,916.91 over</span> &nbsp;63.10% target</div>
-  </div>
-  <div class="tile">
-    <div class="lab">Monday labor</div>
-    <div class="big">15.98%</div>
-    <div class="note"><span class="pill p-good">23.48 hrs under schedule</span></div>
+    <div class="lab">Labor, Tuesday</div>
+    <div class="big">36.96%</div>
+    <div class="row"><span>Bar to hit</span><b>21.66%</b></div>
+    <div class="row"><span>Hours worked vs scheduled</span><b>57.63 of 79.50</b></div>
+    <div class="row"><span>Average rate paid</span><b class="neg">$15.39 / hr</b></div>
   </div>
   <div class="tile">
     <div class="lab">Open items</div>
-    <div class="big">10 <span style="font-size:15px;color:var(--ink3);font-weight:700">high</span> &middot; 9 <span style="font-size:15px;color:var(--ink3);font-weight:700">med</span></div>
-    <div class="note">6 items cleared since yesterday</div>
+    <div class="big">20</div>
+    <div class="row"><span>High severity</span><b class="neg">10</b></div>
+    <div class="row"><span>Medium</span><b>10</b></div>
+    <div class="row"><span>Cleared since last update</span><b class="pos">9</b></div>
   </div>
-</div>
-
-<div class="act">
-  <h2>Act today: payroll still on the schedule this week</h2>
-  <p class="lede">Six days of this week have not been worked yet. Measured against what those weekdays actually sell, the posted schedule carries <strong>$487.60</strong> more payroll than the 21.05% target allows. Priced at the $14.29 per hour the store actually paid last week rather than the $12.21 the schedule is costed at, the gap is closer to <strong>$1,392</strong>. Tuesday's window closes at open this morning.</p>
-  <div class="tblwrap">
-  <table>
-    <thead><tr><th>Day</th><th class="num">Sched hrs</th><th class="num">Sched pay</th><th class="num">Comparable sales</th><th class="num">Pay at target</th><th class="num">Difference</th><th class="num">Hours to cut</th></tr></thead>
-    <tbody>
-      <tr><td>Tue 09-08 <span class="pill p-bad">today</span></td><td class="num">68.50</td><td class="num">$766.09</td><td class="num">$3,045.39</td><td class="num">$641.05</td><td class="num pos">+$125.04</td><td class="num">11.2</td></tr>
-      <tr><td>Wed 09-09</td><td class="num">69.00</td><td class="num">$839.16</td><td class="num">$3,474.81</td><td class="num">$731.45</td><td class="num pos">+$107.71</td><td class="num">8.9</td></tr>
-      <tr><td>Thu 09-10</td><td class="num">51.50</td><td class="num">$634.22</td><td class="num">$3,195.48</td><td class="num">$672.65</td><td class="num neg">-$38.43</td><td class="num">0</td></tr>
-      <tr><td>Fri 09-11</td><td class="num">81.00</td><td class="num">$1,017.11</td><td class="num">$5,783.99</td><td class="num">$1,217.53</td><td class="num neg">-$200.42</td><td class="num">0</td></tr>
-      <tr><td>Sat 09-12</td><td class="num">83.00</td><td class="num">$1,021.25</td><td class="num">$4,059.18</td><td class="num">$854.46</td><td class="num pos">+$166.79</td><td class="num">13.6</td></tr>
-      <tr><td>Sun 09-13</td><td class="num">81.50</td><td class="num">$1,026.25</td><td class="num">$3,322.27</td><td class="num">$699.34</td><td class="num pos">+$326.91</td><td class="num">26.0</td></tr>
-      <tr class="tot"><td>Tue to Sun</td><td class="num">434.50</td><td class="num">$5,304.08</td><td class="num">$22,881.13</td><td class="num">$4,816.48</td><td class="num pos">+$487.60</td><td class="num">59.7</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <h3>Where to cut, in order</h3>
-  <ul class="tight">
-    <li><strong>Tuesday 09-08, about 11 hours.</strong> Smaller than Sunday but it expires this morning. Every hour not cut before open is spent.</li>
-    <li><strong>Sunday 09-13, about 26 hours, $326.91.</strong> The single biggest day and the clearest one. Sunday is posted at 81.50 hours this week against 64.00 hours a week ago, on a lower sales plan. Sundays have averaged $3,322 across the last four.</li>
-    <li><strong>Saturday 09-12, about 13.6 hours, $166.79.</strong> Saturdays have averaged $4,059 across the last four, not the $4,900 one strong Saturday in late August suggests. Trim, do not gut.</li>
-    <li><strong>Wednesday 09-09, about 8.9 hours, $107.71.</strong> Window closes at open tomorrow.</li>
-    <li>Thursday and Friday are already below target. Leave both alone.</li>
-  </ul>
 </div>
 
 <div class="card">
-  <h2>Monday, September 7</h2>
-  <p class="lede">Labor Day. Derek Beindorff opened and closed, and answered all nine questions.</p>
-  <div class="grid2">
-    <div>
-      <h3>Sales</h3>
-      <div class="kv"><span class="k">Gross sales</span><span class="v">$3,220.52</span></div>
-      <div class="kv"><span class="k">Plan</span><span class="v">$3,115.21</span></div>
-      <div class="kv"><span class="k">Against plan</span><span class="v" style="color:var(--good)">+$105.31 (+3.4%)</span></div>
-      <div class="kv"><span class="k">Average of last four Mondays</span><span class="v">$2,256.85</span></div>
-      <div class="kv"><span class="k">Against a normal Monday</span><span class="v" style="color:var(--good)">+$963.67 (+42.7%)</span></div>
-      <div class="kv"><span class="k">Labor Day last year</span><span class="v">$3,894.02</span></div>
-      <div class="kv"><span class="k">Against Labor Day last year</span><span class="v" style="color:var(--bad)">-$673.50 (-17.3%)</span></div>
-      <div class="kv"><span class="k">Net sales</span><span class="v">$3,138.12</span></div>
+  <h2>Act today: payroll still on the schedule</h2>
+  <div class="body">
+    <p><b>$534.22 of payroll sits above the 21.05% target across the five days of this week that have not been worked yet.</b> Every dollar of it can still be taken off the schedule. The same money cannot be recovered after the shift is worked.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Day</th><th class="num">Sales plan</th><th class="num">Last 4 same days</th><th class="num">Scheduled hours</th><th class="num">Scheduled pay</th><th class="num">Pay at target</th><th class="num">Over</th><th>Call</th></tr></thead>
+      <tbody>
+        <tr><td>Wed 09-09 (today)</td><td class="num">$3,609.29</td><td class="num">$3,474.84</td><td class="num">69.00</td><td class="num">$839.16</td><td class="num">$759.76</td><td class="num neg">+$79.40</td><td>Trim 6.5 hours before open</td></tr>
+        <tr><td>Thu 09-10</td><td class="num">$3,330.54</td><td class="num">$3,195.45</td><td class="num">64.50</td><td class="num">$879.22</td><td class="num">$701.08</td><td class="num neg">+$178.14</td><td>Cut second, 13.1 hours</td></tr>
+        <tr><td>Fri 09-11</td><td class="num">$4,677.82</td><td class="num">$5,783.99</td><td class="num">82.00</td><td class="num">$1,037.11</td><td class="num">$984.68</td><td class="num neg">+$52.43</td><td>Leave alone, Fridays run ahead of plan</td></tr>
+        <tr><td>Sat 09-12</td><td class="num">$4,327.54</td><td class="num">$4,059.19</td><td class="num">77.00</td><td class="num">$901.25</td><td class="num">$910.95</td><td class="num pos">-$9.70</td><td>On target, leave alone</td></tr>
+        <tr><td>Sun 09-13</td><td class="num">$3,306.46</td><td class="num">$3,322.27</td><td class="num">80.50</td><td class="num">$929.95</td><td class="num">$696.01</td><td class="num neg">+$233.94</td><td><b>Cut first, 20.3 hours</b></td></tr>
+      </tbody>
+      <tfoot><tr><th>Five days remaining</th><th class="num">$19,251.65</th><th class="num">$19,835.74</th><th class="num">373.00</th><th class="num">$4,586.69</th><th class="num">$4,052.47</th><th class="num neg">+$534.22</th><th>33.9 hours to take out</th></tr></tfoot>
+    </table>
     </div>
-    <div>
-      <h3>Labor</h3>
-      <div class="kv"><span class="k">Hours worked</span><span class="v">35.52</span></div>
-      <div class="kv"><span class="k">Hours scheduled</span><span class="v">59.00</span></div>
-      <div class="kv"><span class="k">Under schedule</span><span class="v" style="color:var(--good)">23.48 hrs</span></div>
-      <div class="kv"><span class="k">Labor cost</span><span class="v">$514.76</span></div>
-      <div class="kv"><span class="k">Labor as a percent of sales</span><span class="v" style="color:var(--good)">15.98%</span></div>
-      <div class="kv"><span class="k">Percent needed to hit budget</span><span class="v">21.66%</span></div>
-      <div class="kv"><span class="k">Average rate paid</span><span class="v">$14.49 per hour</span></div>
-      <div class="kv"><span class="k">Punches still posting</span><span class="v">Yes, figure may rise</span></div>
-    </div>
-  </div>
-  <h3>What Derek reported</h3>
-  <ul class="tight">
-    <li>Unusual factor: Labor Day.</li>
-    <li>Cash deposit counted: <strong>$623</strong>, counted by Derek. Expected cash from the day was $623.15, so the count proves to 15 cents.</li>
-    <li>Deposit taken to the bank that day by itself: <strong>no</strong>.</li>
-    <li>Nothing 86'd. No equipment, repair or safety issues. No guest complaints, refunds or comps.</li>
-    <li>Staff issue: <em>"Ed, dishwasher, halfassing boards at end of night."</em></li>
-  </ul>
-</div>
-
-<div class="card">
-  <h2>Cash trail, last four nights</h2>
-  <p class="lede">Expected cash for a night is the day's total cash less the proof of non cash tenders. Four nights are shown below. Monday is the only one with a count against it.</p>
-  <div class="tblwrap">
-  <table>
-    <thead><tr><th>Night</th><th class="num">Total cash</th><th class="num">Proof</th><th class="num">Expected cash</th><th class="num">Counted</th><th>Status</th></tr></thead>
-    <tbody>
-      <tr><td>Fri 09-04</td><td class="num">$6,754.67</td><td class="num">$6,257.27</td><td class="num">$497.40</td><td class="num">none</td><td><span class="pill p-bad">no count</span></td></tr>
-      <tr><td>Sat 09-05</td><td class="num">$4,237.74</td><td class="num">$3,539.78</td><td class="num">$697.96</td><td class="num">none</td><td><span class="pill p-bad">no count</span></td></tr>
-      <tr><td>Sun 09-06</td><td class="num">$3,841.94</td><td class="num">$3,439.47</td><td class="num">$402.47</td><td class="num">none</td><td><span class="pill p-bad">no count</span></td></tr>
-      <tr><td>Mon 09-07</td><td class="num">$3,845.35</td><td class="num">$3,222.20</td><td class="num">$623.15</td><td class="num">$623.00</td><td><span class="pill p-good">proves to $0.15</span></td></tr>
-      <tr class="tot"><td>Unverified cash</td><td class="num"></td><td class="num"></td><td class="num">$2,220.83</td><td class="num"></td><td></td></tr>
-    </tbody>
-  </table>
-  </div>
-  <ul class="tight">
-    <li><strong>$1,597.83</strong> of expected cash across Friday, Saturday and Sunday has no count on file. Friday and Saturday are the two biggest cash nights of the week.</li>
-    <li>Monday's $623 was counted correctly but has not been entered against the day in the point of sale, so the day still prints a full value short until someone enters it.</li>
-    <li>Monday's deposit was not taken to the bank that day. Counting is half the control. Banking the same day, by itself, is the other half.</li>
-    <li>Derek's count is the standard to hold everyone to. A 15 cent proof on a holiday Monday is exactly right.</li>
-  </ul>
-</div>
-
-<div class="act">
-  <h2>Paid outs: nothing logged for seven days</h2>
-  <p class="lede">The paid out log has been empty every day from September 1 through September 7. Music, bingo, trivia and weekend DJs have historically been paid in cash at $150 to $350 a night, which is roughly $650 to $850 a week. An empty paid out log on a Friday and Saturday, on the same nights the deposit was not counted, is the single combination that lets cash leave the building without a trace. Nothing here says money is missing. It says nothing would show if it were.</p>
-  <ul class="tight">
-    <li>Every cash payment out of the drawer needs a receipt number and a payee in the log, on the night it is paid.</li>
-    <li>When a receipt number is not available, the date is not a substitute. That has been logged as a receipt number five times since launch.</li>
-  </ul>
-</div>
-
-<div class="card">
-  <h2>Budget Variance, week of August 31 to September 6</h2>
-  <p class="lede">A full seven day week. Total gross of $26,088.36 ties exactly to the seven daily sales figures, so the percentages below stand on complete data.</p>
-  <div class="tblwrap">
-  <table>
-    <thead><tr><th>Category</th><th class="num">Sales</th><th class="num">Cost</th><th class="num">Actual %</th><th class="num">Target %</th><th class="num">Over / under</th></tr></thead>
-    <tbody>
-      <tr><td>Food</td><td class="num">$15,577.64</td><td class="num">$4,346.34</td><td class="num">27.90%</td><td class="num">27.00%</td><td class="num pos">$140.38</td></tr>
-      <tr><td>Draft beer</td><td class="num">$3,218.50</td><td class="num">$3,293.00</td><td class="num">102.31%</td><td class="num">21.00%</td><td class="num pos">$2,617.11</td></tr>
-      <tr><td>Bottle beer</td><td class="num">$1,573.27</td><td class="num">$3,731.45</td><td class="num">237.18%</td><td class="num">24.00%</td><td class="num pos">$3,353.87</td></tr>
-      <tr><td>Liquor</td><td class="num">$5,202.50</td><td class="num">$1,182.25</td><td class="num">22.72%</td><td class="num">18.00%</td><td class="num pos">$245.80</td></tr>
-      <tr><td>Non alcoholic</td><td class="num">$325.21</td><td class="num">$912.33</td><td class="num">280.54%</td><td class="num">24.00%</td><td class="num pos">$834.28</td></tr>
-      <tr><td>Wine</td><td class="num">$173.24</td><td class="num">$8.00</td><td class="num">4.62%</td><td class="num">20.00%</td><td class="num neg">-$26.65</td></tr>
-      <tr class="tot"><td>All beverage together</td><td class="num">$10,492.72</td><td class="num">$9,127.03</td><td class="num">86.98%</td><td class="num">20.04%</td><td class="num pos">$7,024.41</td></tr>
-      <tr class="tot"><td>Total cost of goods</td><td class="num">$26,088.36</td><td class="num">$13,473.37</td><td class="num">51.65%</td><td class="num">24.22%</td><td class="num pos">$7,155.79</td></tr>
-    </tbody>
-  </table>
-  </div>
-  <h3>Read this as one number, not six</h3>
-  <ul class="tight">
-    <li><strong>Food is fine.</strong> 27.90% against a 27.00% target is $140.38 over on a $15,577 category. That is a well run kitchen on cost.</li>
-    <li><strong>Beverage is the entire variance.</strong> $9,127.03 of beverage cost landed against $10,492.72 of beverage sales in one week. Of the $7,155.79 total overage, $7,024.41 of it is beverage.</li>
-    <li>The shape of it is a large beverage buy in that landed in cost but did not land in an inventory location, so nothing came back out of cost at the count. Twenty seven purchased products still have no inventory location assigned, three of them kegs bought on September 3. A product with no location is bought, expensed, and then never counted, which reads exactly like it was all consumed in the week.</li>
-    <li><strong>Prime cost printed 93.44%</strong> against a 63.10% target. With beverage at its blended target the same week reads about 66.5%. The gap between those two figures is the inventory location work, not the crew.</li>
-    <li>Waste values printed 0.00 on every line for a fourth straight week. A kitchen and a bar this size do not throw away nothing.</li>
-  </ul>
-  <h3>Payroll for the same week</h3>
-  <div class="grid2">
-    <div>
-      <div class="kv"><span class="k">Hourly payroll</span><span class="v">$6,655.93</span></div>
-      <div class="kv"><span class="k">As a percent of sales</span><span class="v">25.51%</span></div>
-      <div class="kv"><span class="k">Target</span><span class="v">22.93%</span></div>
-      <div class="kv"><span class="k">Over</span><span class="v" style="color:var(--bad)">$673.86</span></div>
-    </div>
-    <div>
-      <div class="kv"><span class="k">Kitchen</span><span class="v" style="color:var(--bad)">$396.85 over</span></div>
-      <div class="kv"><span class="k">Hourly manager</span><span class="v" style="color:var(--bad)">$178.64 over</span></div>
-      <div class="kv"><span class="k">Bartender</span><span class="v" style="color:var(--bad)">$130.84 over</span></div>
-      <div class="kv"><span class="k">Dishwasher and server</span><span class="v" style="color:var(--good)">$136.42 under</span></div>
-    </div>
+    <p class="note">Sunday carries 80.50 hours against a day that has averaged $3,322 over its last four, the widest gap of the week. Thursday is second. Friday and Saturday are already priced correctly and cutting them would cost sales.</p>
   </div>
 </div>
 
 <div class="card">
   <h2>Open items</h2>
-  <p class="lede">Ten high, nine medium. Items clear the moment the underlying number or attestation lands.</p>
-
-  <h3>High</h3>
-  <div class="flag"><div class="sev"><span class="pill p-bad">High</span></div><div class="body"><div class="ttl">Payroll above target on four of six unworked days</div><div class="dsc">$487.60 above target at the costed rate, about $1,392 at the rate actually paid last week. Tuesday closes at open today, Sunday is the biggest single day.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-bad">High</span></div><div class="body"><div class="ttl">No counted deposit for Friday, Saturday or Sunday</div><div class="dsc">$1,597.83 of expected cash across three nights, including both weekend nights, with no count recorded by anyone.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-bad">High</span></div><div class="body"><div class="ttl">Paid out log empty seven days running</div><div class="dsc">September 1 through September 7. Recurring cash entertainment has not been recorded once in that span.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-bad">High</span></div><div class="body"><div class="ttl">Beverage cost $7,024.41 above target for the week</div><div class="dsc">$9,127.03 of beverage cost against $10,492.72 of beverage sales. Bottle beer alone printed 237% of its own sales.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-bad">High</span></div><div class="body"><div class="ttl">Prime cost 93.44% against a 63.10% target</div><div class="dsc">$7,916.91 over for the week. Beverage accounts for essentially all of it.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-bad">High</span></div><div class="body"><div class="ttl">Twenty seven purchased products have no inventory location</div><div class="dsc">Each one lands in cost and is never counted. Three are kegs added September 3. This is the first thing to check whenever a cost line looks impossible.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-bad">High</span></div><div class="body"><div class="ttl">Purchase orders are confirmed after delivery</div><div class="dsc">Three orders placed September 3 and delivered September 4 carry a confirmation dated September 5. A purchase order written after the goods arrive cannot approve anything.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-bad">High</span></div><div class="body"><div class="ttl">Manager log unanswered Friday, Saturday and Sunday</div><div class="dsc">All nine questions blank for three consecutive nights across the holiday weekend. Monday's log was answered in full.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-bad">High</span></div><div class="body"><div class="ttl">Position level schedule variance past the $200 threshold</div><div class="dsc">Kitchen and dishwasher carry the bulk of it. A small total can hide large offsetting position lines, so the total is not the test.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-bad">High</span></div><div class="body"><div class="ttl">Three employees are not clocking in</div><div class="dsc">Chris Fisher, Andre White Jr and Jacob Finley. Hours that never post cannot be costed, scheduled against, or paid correctly.</div></div></div>
-
-  <h3>Medium</h3>
-  <div class="flag"><div class="sev"><span class="pill p-warn">Med</span></div><div class="body"><div class="ttl">Monday's $623 count is in the log but not entered against the day</div><div class="dsc">Until it is entered, the day prints a full value short even though it proves to 15 cents.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-warn">Med</span></div><div class="body"><div class="ttl">Monday's deposit not banked the same day</div><div class="dsc">Deposits should go to the bank the same day, on their own, never lumped with another day.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-warn">Med</span></div><div class="body"><div class="ttl">No invoice photos uploaded for four days</div><div class="dsc">September 4 through September 7, against deliveries received on September 4. Purchases that reach cost without their invoice are what produce negative usage lines at the count.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-warn">Med</span></div><div class="body"><div class="ttl">Waste values 0.00 on every line, fourth week running</div><div class="dsc">Waste that is not written down turns into cost with no cause attached to it.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-warn">Med</span></div><div class="body"><div class="ttl">Five vendor price increases over 5% still open</div><div class="dsc">Green onions +32.19%, 48 ounce containers +17.08%, rice +7.17%, chicken wings +7.16%, skin on potato chips +7.15%.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-warn">Med</span></div><div class="body"><div class="ttl">Green onions have moved three times in seven days</div><div class="dsc">$13.60 to $15.78, then $22.15 to $29.28. The starting price on the second move does not follow from the first, so the live price should be confirmed with the vendor.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-warn">Med</span></div><div class="body"><div class="ttl">Kitchen payroll $396.85 over target for the week</div><div class="dsc">The largest single position overage. Dishwasher and server both came in under.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-warn">Med</span></div><div class="body"><div class="ttl">Closing duties not completed to standard</div><div class="dsc">Derek reported the dishwasher not finishing the boards at close on Monday night. Board cleaning at close is a sanitation item, not a preference.</div></div></div>
-  <div class="flag"><div class="sev"><span class="pill p-warn">Med</span></div><div class="body"><div class="ttl">Order sizes cannot be checked against the purchase allotment</div><div class="dsc">The allotment figure is not carried alongside the orders, so the $500 approval rule cannot be tested from data. It has to be attested on the checklist.</div></div></div>
-
-  <h3>Cleared since yesterday</h3>
-  <ul class="tight">
-    <li>Monday's log answered in full by the closing manager, on the night, without prompting.</li>
-    <li>Deposit counted and proves to 15 cents against expected cash.</li>
-    <li>Monday's sales figure posted and available first thing.</li>
-    <li>Sales beat plan and ran 42.7% above a normal Monday.</li>
-    <li>Monday labor 23.48 hours under schedule at 15.98%.</li>
-    <li>Food cost 27.90% against a 27.00% target.</li>
-  </ul>
-</div>
-
-<div class="card">
-  <h2>This week at a glance</h2>
-  <p class="lede">Monday, September 7 through Sunday, September 13.</p>
-  <div class="tblwrap"><table id="weekTable">
-    <thead><tr><th>Day</th><th class="num">Sales</th><th class="num">Plan</th><th class="num">Variance</th><th class="num">Sched hrs</th><th class="num">Labor $</th><th>Status</th></tr></thead>
-    <tbody></tbody>
-  </table></div>
-</div>
-
-<div class="card">
-  <h2>Daily checklist, Monday September 7</h2>
-  <p class="lede">Green is done or verified from data. Red needs action. Grey means there was no line to attest on the day.</p>
-  <div class="grid2">
-    <div>
-      <h3>Verified from data</h3>
-      <div class="kv"><span class="k"><span class="dot d-ok"></span>Sales posted</span><span class="v">OK</span></div>
-      <div class="kv"><span class="k"><span class="dot d-ok"></span>Manager log completed</span><span class="v">OK</span></div>
-      <div class="kv"><span class="k"><span class="dot d-ok"></span>Deposit counted</span><span class="v">$623.00</span></div>
-      <div class="kv"><span class="k"><span class="dot d-ok"></span>Over or short within $20</span><span class="v">$0.15</span></div>
-      <div class="kv"><span class="k"><span class="dot d-flag"></span>Deposit entered against the day</span><span class="v">Not yet</span></div>
-      <div class="kv"><span class="k"><span class="dot d-flag"></span>Deposit banked same day</span><span class="v">No</span></div>
-      <div class="kv"><span class="k"><span class="dot d-flag"></span>Invoices uploaded</span><span class="v">None</span></div>
-      <div class="kv"><span class="k"><span class="dot d-flag"></span>Paid outs logged with receipts</span><span class="v">None</span></div>
-      <div class="kv"><span class="k"><span class="dot d-ok"></span>Price increases reviewed</span><span class="v">No new</span></div>
-      <div class="kv"><span class="k"><span class="dot d-flag"></span>New products given a location</span><span class="v">27 open</span></div>
-      <div class="kv"><span class="k"><span class="dot d-ok"></span>Labor within target</span><span class="v">15.98%</span></div>
-    </div>
-    <div>
-      <h3>Attested on the checklist</h3>
-      <div class="kv"><span class="k"><span class="dot d-na"></span>Purchase allotment within guidelines</span><span class="v">n/a</span></div>
-      <div class="kv"><span class="k"><span class="dot d-na"></span>Orders over $500 approved first</span><span class="v">n/a</span></div>
-      <div class="kv"><span class="k"><span class="dot d-na"></span>Purchase orders placed and hanging</span><span class="v">n/a</span></div>
-      <div class="kv"><span class="k"><span class="dot d-na"></span>Recipe cards</span><span class="v">n/a</span></div>
-      <div class="kv"><span class="k"><span class="dot d-na"></span>Digital operating checklists</span><span class="v">n/a</span></div>
-      <div class="kv"><span class="k"><span class="dot d-na"></span>Prep sheets</span><span class="v">n/a</span></div>
-      <div class="kv"><span class="k"><span class="dot d-na"></span>Preshift</span><span class="v">n/a</span></div>
-      <div class="kv"><span class="k"><span class="dot d-na"></span>Unpaid invoice audit</span><span class="v">n/a</span></div>
-      <div class="kv"><span class="k"><span class="dot d-na"></span>Key item report</span><span class="v">n/a</span></div>
-      <div class="kv"><span class="k"><span class="dot d-na"></span>Monday: usage report after inventory</span><span class="v">n/a</span></div>
-      <div class="kv"><span class="k"><span class="dot d-na"></span>Monday: generate ideal cost</span><span class="v">n/a</span></div>
-      <div class="kv"><span class="k"><span class="dot d-na"></span>Monday: value waste sheets</span><span class="v">n/a</span></div>
-    </div>
+  <div class="body">
+    <div class="flag"><div class="sev"><span class="pill p-hi">High</span></div><div class="txt"><strong>Cash has not left the building on its own day for seven straight nights</strong><span>$3,862.08 across 09-02 to 09-08. Monday and Tuesday were both counted and both answered "no" to same day banking. Cash held on site is the single easiest loss to prevent and the hardest to prove after the fact.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-hi">High</span></div><div class="txt"><strong>Payroll above target on the unworked days of this week</strong><span>$534.22, with Sunday 09-13 carrying $233.94 of it and Thursday 09-10 another $178.14.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-hi">High</span></div><div class="txt"><strong>Beverage cost of goods ran 86.98% as a group for the week ended 09-06</strong><span>$9,127.03 of cost against $10,492.72 of beverage sales, $7,024.41 above the 20.04% blended target. Read the beverage lines together, not one at a time. Food landed at 27.90% against a 27.00% target, which is normal, so the count itself is sound. The gap traces to product that was purchased into cost with no inventory location to be counted into, so its whole purchase reads as consumed.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-hi">High</span></div><div class="txt"><strong>Thirteen products are in cost with no inventory location</strong><span>Four are alcohol: Four Roses Small Batch Bourbon (09-08), Budweiser 20 loose bottles, Kona Big Wave one sixth barrel, Sierra Nevada Hazy Little Thing one half barrel. Also Pasta Egg Noodle, Bread Crumbs Italian, Tea Black Decaf, Walnuts, Dried Cherries, Pasta Orzo, Bowls 32oz, Gielow Jalapeno Peppers, Frozen Tortelloni. Assigning a location is a one time check off per product and it is what stops this from repeating next week.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-hi">High</span></div><div class="txt"><strong>Hours came down 21.87 on Tuesday and payroll still went up</strong><span>57.63 hours worked against 79.50 scheduled, yet $887.21 of payroll landed $121.12 above the scheduled amount. Average rate paid was $15.39 an hour against $11.18 scheduled. Third day running. The hours being cut are the cheap ones, so the cuts do not reach the money. Build the weekend and evening schedule to a dollar figure, not an hour count.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-hi">High</span></div><div class="txt"><strong>Purchase orders are being confirmed after the food arrives</strong><span>GFS 853187551 was ordered 09-05, delivered 09-06 and confirmed 09-08, two days after delivery. GFS 9039857571 was confirmed the day it was delivered. While orders are back confirmed, no approval step can sit in front of them.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-hi">High</span></div><div class="txt"><strong>Coleslaw up 16.39% from GFS</strong><span>Shredded Coleslaw with green cabbage, red cabbage and carrots moved from $25.93 to $30.18. Confirm the new price against the shelf and check whether the pack size changed.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-hi">High</span></div><div class="txt"><strong>Sunday 09-06 is now a confirmed missed close</strong><span>No manager answered the nine questions and no deposit was counted. Two later closes have come and gone without the answers arriving, so the night is closed out unattested with $402.47 of cash unverified.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-hi">High</span></div><div class="txt"><strong>The schedule for the week ended 09-06 printed favourable and was not</strong><span>The total showed $698.54 to the good, produced entirely by the hourly manager line carrying 5.00 hours against 66.82 budgeted. The five sound positions were $716.27 unfavourable and about 61 hours over: Kitchen $390.80, Server $178.51, Expo $76.20, Dishwasher $53.74, Bartender $17.02. Approve schedules by position, never off the printed total.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-hi">High</span></div><div class="txt"><strong>Prime cost 66.5% against a 63.10% target</strong><span>$891.31 over for the week ended 09-06, and the driver is labor rather than food. The figure before the beverage adjustment above prints 93.44%; that version is carrying the unassigned product cost and is not the week's true result.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-med">Medium</span></div><div class="txt"><strong>Two paid outs went out with a date where the receipt number belongs</strong><span>$150.00 in cash for Bingo and $14.28 for cleaning supplies, both on 09-08, both showing 9/8/26 in the receipt field. Cash to entertainment is the category that has gone unrecorded here before. A receipt number, or a photo of the receipt, closes it.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-med">Medium</span></div><div class="txt"><strong>$100 of contracted kitchen labor was billed on an in house invoice</strong><span>Vendor "Vivios", invoice number 09082026, coded Contracted Labor / Cooks. The invoice number is the date. Confirm who was paid, on what terms, and whether it belongs in payroll rather than in an invoice.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-med">Medium</span></div><div class="txt"><strong>Sales miss on Tuesday</strong><span>18.78% under plan and 16.57% under the matched day last year. Tuesdays have averaged $3,045 over the last four.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-med">Medium</span></div><div class="txt"><strong>Labor ran 15.30 points above the bar on Tuesday</strong><span>36.96% against the 21.66% the day needed. The driver is sales, not hours: hours came in 21.87 under the schedule. See the rate item above for where the money actually went.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-med">Medium</span></div><div class="txt"><strong>Pizza boxes up 6.74%</strong><span>GFS 16 x 16 x 1.75 inch, $33.53 to $35.79.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-med">Medium</span></div><div class="txt"><strong>Cut potatoes went up 7.15% and straight back down 6.67%</strong><span>$48.52 to $51.99 on 09-05 and back to $48.52 on 09-07, a round trip to the cent. Check the live shelf price once and close it out.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-med">Medium</span></div><div class="txt"><strong>Nine price increases are still open and unconfirmed</strong><span>GFS Onions Green Bunches +32.19%, GFS Containers 48oz +17.08%, Cornerstone Sour Cream +14.19%, Petitpren Bud Light 20 loose bottles +11.02%, Petitpren RB Sugar Free +8.97%, GFS Rice Parboiled +7.17%, GFS Chicken Wings Breaded +7.16%, GFS Salad Blend +6.22%, and GFS Romaine Lettuce which moved $3.00 to $23.25 and back on 08-21 and has never been checked against a live price.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-med">Medium</span></div><div class="txt"><strong>Waste values are $0.00 on every line for a fourth week</strong><span>With no waste recorded, every dollar of cost variance is forced to read as theft, over portioning or miscounted inventory. Some of it is ordinary waste nobody wrote down, and the sheet is what separates the two.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-med">Medium</span></div><div class="txt"><strong>Monday's staffing note has no follow up</strong><span>Derek Beindorff logged "Ed, dishwasher, halfassing boards at end of night" on 09-07. Tuesday's log records no employee issues and no resolution. Close the loop so the note does not become the norm.</span></div></div>
+    <div class="flag"><div class="sev"><span class="pill p-med">Medium</span></div><div class="txt"><strong>Invoices for the closed week 08-31 to 09-06 are not all in</strong><span>Nothing was logged on 09-07. Four invoices came in on 09-08 and they belong to the current week. Until the closed week is complete, its cost percentages describe a partial week.</span></div></div>
   </div>
 </div>
 
 <div class="card">
-  <h2>Recurring items</h2>
-  <p class="lede">Each bar fills a day at a time and resets the day the item is marked done.</p>
-  <div id="cadence"></div>
+  <h2>Cash trail</h2>
+  <div class="body">
+    <p><b>Two closers counted the deposit by hand on Monday and Tuesday and both proved out to within fifteen cents.</b> That is exactly the behaviour this system was put in for, and it should be said out loud to Derek and Joe.</p>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Night</th><th class="num">Expected cash</th><th class="num">Counted</th><th class="num">Proves to</th><th>Counted by</th><th>Banked same day</th></tr></thead>
+      <tbody>
+        <tr><td>Wed 09-02</td><td class="num">$850.66</td><td class="num">none</td><td class="num">unverified</td><td>no answer</td><td><span class="pill p-hi">No</span></td></tr>
+        <tr><td>Thu 09-03</td><td class="num">$496.33</td><td class="num">none</td><td class="num">unverified</td><td>no answer</td><td><span class="pill p-hi">No</span></td></tr>
+        <tr><td>Fri 09-04</td><td class="num">$497.40</td><td class="num">none</td><td class="num">unverified</td><td>no answer</td><td><span class="pill p-hi">No</span></td></tr>
+        <tr><td>Sat 09-05</td><td class="num">$697.96</td><td class="num">none</td><td class="num">unverified</td><td>no answer</td><td><span class="pill p-hi">No</span></td></tr>
+        <tr><td>Sun 09-06</td><td class="num">$402.47</td><td class="num">none</td><td class="num">unverified</td><td>no answer</td><td><span class="pill p-hi">No</span></td></tr>
+        <tr><td>Mon 09-07</td><td class="num">$623.15</td><td class="num">$623.00</td><td class="num pos">$0.15</td><td>Derek Beindorff</td><td><span class="pill p-hi">No</span></td></tr>
+        <tr><td>Tue 09-08</td><td class="num">$294.11</td><td class="num">$294.00</td><td class="num pos">$0.11</td><td>Joseph Raven</td><td><span class="pill p-hi">No</span></td></tr>
+      </tbody>
+      <tfoot><tr><th>Seven nights</th><th class="num">$3,862.08</th><th class="num">$917.00</th><th class="num">two of seven</th><th></th><th class="num">none banked</th></tr></tfoot>
+    </table>
+    </div>
+    <p class="note">The end of day prints Tuesday $294.11 short and Monday $623.15 short. Neither is a till error. There is no cash tender line in the end of day, so the gap between Total Cash and Proof is the deposit itself. Once the counted figure is set against it, both nights balance to pennies. The item that remains is banking: $3,862.08 has accumulated without a single same day deposit slip.</p>
+  </div>
+</div>
+
+<div class="grid2">
+<div class="card">
+  <h2>Budget variance, week ended 09-06</h2>
+  <div class="body">
+    <div class="scroll">
+    <table style="min-width:420px">
+      <thead><tr><th>Line</th><th class="num">Actual</th><th class="num">Target</th><th class="num">Over</th></tr></thead>
+      <tbody>
+        <tr><td>Gross sales</td><td class="num">$26,088.36</td><td class="num">$28,401.31</td><td class="num neg">-$2,312.95</td></tr>
+        <tr><td>Food cost</td><td class="num">27.90%</td><td class="num">27.00%</td><td class="num">$140.38</td></tr>
+        <tr><td><b>Beverage, as a group</b></td><td class="num"><b>86.98%</b></td><td class="num">20.04%</td><td class="num neg"><b>$7,024.41</b></td></tr>
+        <tr><td>Hourly payroll</td><td class="num">$6,655.93</td><td class="num">$5,982.07</td><td class="num neg">$673.86</td></tr>
+        <tr><td>Total payroll</td><td class="num">41.80%</td><td class="num">38.88%</td><td class="num neg">$761.12</td></tr>
+        <tr><td><b>Prime cost</b></td><td class="num"><b>66.52%</b></td><td class="num">63.10%</td><td class="num neg"><b>$891.31</b></td></tr>
+        <tr><td>Waste values</td><td class="num">$0.00</td><td class="num">recorded</td><td class="num"><span class="pill p-med">Open</span></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">Sales for the week are complete, all seven days. Read the beverage lines as one group: draft printed 102.31%, bottle 237.18% and non alcoholic 280.54% while liquor sat at 22.72% and wine at 4.62%. Numbers in that shape are product landing in cost without landing in an inventory location, together with category mis allocation, not $7,000 of missing beer. Food at 27.90% is the proof: a genuine count failure takes food with it and food is normal.</p>
+  </div>
 </div>
 
 <div class="card">
-  <h2>Setup items that unlock the reports</h2>
-  <p class="lede">These are the store side steps that make the cost and usage numbers above trustworthy. Each one closes a specific hole seen in this week's figures.</p>
-  <ul class="tight">
-    <li><strong>Assign an inventory location to all 27 open products.</strong> This is the single highest value item on the list. It is the direct cause of a 93.44% prime cost reading against a 66.5% underlying reality.</li>
-    <li><strong>Generate ideal cost.</strong> Until ideal usage is set, the usage report cannot show a variance at all, only actual usage restated. There is no way to prove or disprove an overage without it.</li>
-    <li><strong>Upload invoice photos the day the delivery arrives.</strong> A purchase counted on the shelf with no invoice in the system produces a negative usage line, which cancels a real overage somewhere else and hides both.</li>
-    <li><strong>Enter the counted deposit against the day.</strong> Counting it and writing it in the log is most of the work. Entering it is what closes the day.</li>
-    <li><strong>Schedule people in the department they clock into.</strong> Managers clocking as hourly manager while scheduled as bartender or server moves real hours between front and back of house and makes both budgets read incorrectly.</li>
-    <li><strong>Value the waste sheets weekly.</strong> Four weeks of zeros means every dollar of waste is currently landing in cost as though it were sold.</li>
-  </ul>
+  <h2>Schedule and labor</h2>
+  <div class="body">
+    <div class="scroll">
+    <table style="min-width:420px">
+      <thead><tr><th>Position</th><th class="num">Variance $</th><th class="num">Hours over</th></tr></thead>
+      <tbody>
+        <tr><td>Kitchen</td><td class="num neg">-$390.80</td><td class="num">21.07</td></tr>
+        <tr><td>Server</td><td class="num neg">-$178.51</td><td class="num">29.80</td></tr>
+        <tr><td>Expo</td><td class="num neg">-$76.20</td><td class="num">n/a</td></tr>
+        <tr><td>Dishwasher</td><td class="num neg">-$53.74</td><td class="num">n/a</td></tr>
+        <tr><td>Bartender</td><td class="num neg">-$17.02</td><td class="num">n/a</td></tr>
+        <tr><td><b>Five sound positions</b></td><td class="num neg"><b>-$716.27</b></td><td class="num"><b>about 61</b></td></tr>
+        <tr><td>Hourly manager line</td><td class="num pos">+$1,414.81</td><td class="num">5.00 of 66.82</td></tr>
+        <tr><td><b>Printed total</b></td><td class="num pos"><b>+$698.54</b></td><td class="num">n/a</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">Kitchen is the position to cut first, and it is the same position that is over on this week's forward schedule. Sixth week in a row that a favourable total has been produced by a single position line.</p>
+  </div>
+</div>
 </div>
 
-<footer>Restaurant Systems Pro &nbsp;&middot;&nbsp; Vivio's Warren owner reporting &nbsp;&middot;&nbsp; Data through September 7, 2026</footer>
+<div class="card">
+  <h2>This week, day by day</h2>
+  <div class="body">
+    <div class="scroll"><table id="weekTable" style="min-width:640px">
+      <thead><tr><th>Day</th><th class="num">Actual</th><th class="num">Plan</th><th class="num">Var</th><th class="num">Same day last year</th><th class="num">Var</th><th class="num">Labor %</th><th>Status</th></tr></thead>
+      <tbody></tbody>
+      <tfoot><tr><th>Week to date</th><th class="num" id="wtdA"></th><th class="num" id="wtdP"></th><th class="num" id="wtdV"></th><th class="num" id="wtdL"></th><th class="num" id="wtdLV"></th><th class="num"></th><th></th></tr></tfoot>
+    </table></div>
+    <p class="note">Last year's comparison for this week is taken from the matching holiday week rather than the calendar dates, so Labor Day sits against Labor Day and every day of the week lines up the same way it trades.</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Daily duties, Tuesday 09-08</h2>
+  <div class="body">
+    <div class="scroll"><table style="min-width:620px">
+      <thead><tr><th>Duty</th><th>Tue 09-08</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>Manager log, all nine questions</td><td><span class="pill p-ok">OK</span></td><td>Answered in full by Joseph Raven. Derek opened, Joe closed.</td></tr>
+        <tr><td>Cash deposit counted by a person</td><td><span class="pill p-ok">OK</span></td><td>$294.00 counted by Joseph Raven, proves to $0.11.</td></tr>
+        <tr><td>Deposit banked same day, by itself</td><td><span class="pill p-hi">Flag</span></td><td>Answered no. Seventh night running.</td></tr>
+        <tr><td>Over and short within $20</td><td><span class="pill p-ok">OK</span></td><td>$0.11 against the counted deposit.</td></tr>
+        <tr><td>86 items and outages</td><td><span class="pill p-ok">OK</span></td><td>Nothing 86'd.</td></tr>
+        <tr><td>Equipment, repair, safety</td><td><span class="pill p-ok">OK</span></td><td>None reported.</td></tr>
+        <tr><td>Complaints, refunds, comps</td><td><span class="pill p-ok">OK</span></td><td>None reported.</td></tr>
+        <tr><td>Callouts and no shows</td><td><span class="pill p-ok">OK</span></td><td>None reported.</td></tr>
+        <tr><td>Paid outs logged with a receipt</td><td><span class="pill p-med">Flag</span></td><td>Two lines logged, both carrying a date instead of a receipt number.</td></tr>
+        <tr><td>Invoices uploaded</td><td><span class="pill p-ok">OK</span></td><td>Four invoices photographed, $1,539.50 in total.</td></tr>
+        <tr><td>Sales posted</td><td><span class="pill p-ok">OK</span></td><td>Full end of day and tender detail available on time.</td></tr>
+        <tr><td>Price increases over 5%</td><td><span class="pill p-med">Flag</span></td><td>Coleslaw +16.39% and pizza boxes +6.74%.</td></tr>
+        <tr><td>New products assigned to an inventory location</td><td><span class="pill p-hi">Flag</span></td><td>Thirteen open, four of them alcohol.</td></tr>
+        <tr><td>Orders confirmed before delivery</td><td><span class="pill p-hi">Flag</span></td><td>Two GFS orders confirmed on or after their delivery date.</td></tr>
+        <tr><td>Labor within target</td><td><span class="pill p-med">Flag</span></td><td>36.96% against 21.66%, driven by sales.</td></tr>
+        <tr><td>Purchase allotment and purchase orders within guidelines</td><td><span class="pill p-na">n/a</span></td><td>No manager attestation recorded for the day.</td></tr>
+        <tr><td>Orders over $500 approved first</td><td><span class="pill p-na">n/a</span></td><td>No manager attestation recorded for the day.</td></tr>
+        <tr><td>Recipe cards, operating checklists, prep sheets, preshift</td><td><span class="pill p-na">n/a</span></td><td>No manager attestation recorded for the day.</td></tr>
+        <tr><td>Unpaid invoice audit and Key Item report</td><td><span class="pill p-na">n/a</span></td><td>No manager attestation recorded for the day.</td></tr>
+        <tr><td>Tuesday duty: budget variance analysed</td><td><span class="pill p-na">n/a</span></td><td>No manager attestation recorded for the day.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<div class="grid2">
+<div class="card">
+  <h2>Cadence</h2>
+  <div class="body" id="cadence"></div>
+</div>
+
+<div class="card">
+  <h2>Launch checklist</h2>
+  <div class="body">
+    <div class="scroll"><table style="min-width:380px">
+      <thead><tr><th>Item</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Daily manager log in use</td><td><span class="pill p-ok">Live</span></td></tr>
+        <tr><td>End of day posting on time</td><td><span class="pill p-ok">Live</span></td></tr>
+        <tr><td>Closer counts the deposit by hand</td><td><span class="pill p-ok">Two nights running</span></td></tr>
+        <tr><td>Deposit banked same day</td><td><span class="pill p-hi">Not yet</span></td></tr>
+        <tr><td>Paid out log with receipt numbers</td><td><span class="pill p-med">Partial</span></td></tr>
+        <tr><td>Invoices photographed daily</td><td><span class="pill p-med">Partial</span></td></tr>
+        <tr><td>Every product assigned to an inventory location</td><td><span class="pill p-hi">Thirteen open</span></td></tr>
+        <tr><td>Waste sheets valued weekly</td><td><span class="pill p-hi">Not yet</span></td></tr>
+        <tr><td>Ideal cost generated in MPG</td><td><span class="pill p-hi">Not yet</span></td></tr>
+        <tr><td>Schedules approved by position</td><td><span class="pill p-hi">Not yet</span></td></tr>
+        <tr><td>Purchase orders raised before delivery</td><td><span class="pill p-hi">Not yet</span></td></tr>
+        <tr><td>Next month's sales plan on file by the 20th</td><td><span class="pill p-ok">September in</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">Nine of twelve launch items are now live or partly live. The three that move the most money are the inventory locations, the valued waste sheets and approving the schedule by position.</p>
+  </div>
+</div>
+</div>
+
+<footer>Restaurant Systems Pro. Vivio's Warren owner alerts, updated through Tuesday, September 8, 2026.</footer>
 </div>
 
 <script>
-var WEEK = [
-  {d:"Mon 09-07", sales:3220.52, plan:3115.21, hrs:35.52, pay:514.76, st:"worked"},
-  {d:"Tue 09-08", sales:null, plan:2955.36, hrs:68.50, pay:766.09, st:"scheduled"},
-  {d:"Wed 09-09", sales:null, plan:3609.29, hrs:69.00, pay:839.16, st:"scheduled"},
-  {d:"Thu 09-10", sales:null, plan:3330.54, hrs:51.50, pay:634.22, st:"scheduled"},
-  {d:"Fri 09-11", sales:null, plan:4677.82, hrs:81.00, pay:1017.11, st:"scheduled"},
-  {d:"Sat 09-12", sales:null, plan:4327.54, hrs:83.00, pay:1021.25, st:"scheduled"},
-  {d:"Sun 09-13", sales:null, plan:3306.46, hrs:81.50, pay:1026.25, st:"scheduled"}
-];
-var CADENCE = [
-  {n:"Restaurant walkthrough", cycle:14, elapsed:20},
-  {n:"Equipment inspection", cycle:31, elapsed:20},
-  {n:"Automatic par review", cycle:42, elapsed:20},
-  {n:"Next month's sales plan on file", cycle:20, elapsed:8}
-];
-function money(v){return "$"+v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});}
 (function(){
-  var tb=document.querySelector("#weekTable tbody"), rows="";
-  for(var i=0;i<WEEK.length;i++){
-    var w=WEEK[i], sales="not yet", varc="not yet", badge;
-    if(w.sales!==null){
-      sales=money(w.sales);
-      var dv=w.sales-w.plan, pc=(w.sales/w.plan-1)*100;
-      varc='<span class="'+(dv>=0?"neg":"pos")+'">'+(dv>=0?"+":"")+money(dv).replace("$-","-$")+" ("+(pc>=0?"+":"")+pc.toFixed(1)+"%)</span>";
-      badge='<span class="pill p-good">beat plan</span>';
-    } else {
-      badge='<span class="pill p-neut">to come</span>';
-    }
-    rows+="<tr><td>"+w.d+'</td><td class="num">'+sales+'</td><td class="num">'+money(w.plan)+'</td><td class="num">'+varc+'</td><td class="num">'+w.hrs.toFixed(2)+'</td><td class="num">'+money(w.pay)+"</td><td>"+badge+"</td></tr>";
-  }
-  var ts=0,tp=0,th=0,tw=0;
-  for(var j=0;j<WEEK.length;j++){ if(WEEK[j].sales!==null) ts+=WEEK[j].sales; tp+=WEEK[j].plan; th+=WEEK[j].hrs; tw+=WEEK[j].pay; }
-  rows+='<tr class="tot"><td>Week</td><td class="num">'+money(ts)+'</td><td class="num">'+money(tp)+'</td><td class="num">1 of 7 days</td><td class="num">'+th.toFixed(2)+'</td><td class="num">'+money(tw)+"</td><td></td></tr>";
-  tb.innerHTML=rows;
+  var weekStart = "2026-09-07";
+  var days = [
+    {d:"Mon 09-07", actual:3220.52, plan:3115.21, ly:3894.02, labor:18.46, status:"Beat plan"},
+    {d:"Tue 09-08", actual:2400.40, plan:2955.36, ly:2877.29, labor:36.96, status:"Under plan"},
+    {d:"Wed 09-09", actual:null, plan:3609.29, ly:3150.99, labor:null, status:"Today"},
+    {d:"Thu 09-10", actual:null, plan:3330.54, ly:9309.81, labor:null, status:"Scheduled"},
+    {d:"Fri 09-11", actual:null, plan:4677.82, ly:6185.47, labor:null, status:"Scheduled"},
+    {d:"Sat 09-12", actual:null, plan:4327.54, ly:4878.68, labor:null, status:"Scheduled"},
+    {d:"Sun 09-13", actual:null, plan:3306.46, ly:5205.38, labor:null, status:"Scheduled"}
+  ];
+  function money(v){ return v===null? "n/a" : "$"+v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function pct(a,b){ if(a===null||!b) return "n/a"; var p=(a-b)/b*100; return (p>=0?"+":"")+p.toFixed(2)+"%"; }
+  function cls(a,b){ if(a===null||!b) return ""; return (a-b)>=0? "pos":"neg"; }
+  var tb=document.querySelector("#weekTable tbody");
+  var sa=0,sp=0,sl=0,n=0;
+  days.forEach(function(x){
+    var tr=document.createElement("tr");
+    if(x.actual!==null){ sa+=x.actual; sp+=x.plan; sl+=x.ly; n++; }
+    tr.innerHTML =
+      "<td>"+x.d+"</td>"+
+      "<td class='num'>"+money(x.actual)+"</td>"+
+      "<td class='num'>"+money(x.plan)+"</td>"+
+      "<td class='num "+cls(x.actual,x.plan)+"'>"+pct(x.actual,x.plan)+"</td>"+
+      "<td class='num'>"+money(x.ly)+"</td>"+
+      "<td class='num "+cls(x.actual,x.ly)+"'>"+pct(x.actual,x.ly)+"</td>"+
+      "<td class='num'>"+(x.labor===null?"n/a":x.labor.toFixed(2)+"%")+"</td>"+
+      "<td>"+x.status+"</td>";
+    tb.appendChild(tr);
+  });
+  document.getElementById("wtdA").textContent = money(sa);
+  document.getElementById("wtdP").textContent = money(sp);
+  document.getElementById("wtdV").textContent = pct(sa,sp);
+  document.getElementById("wtdV").className = "num "+cls(sa,sp);
+  document.getElementById("wtdL").textContent = money(sl);
+  document.getElementById("wtdLV").textContent = pct(sa,sl);
+  document.getElementById("wtdLV").className = "num "+cls(sa,sl);
 
-  var c=document.getElementById("cadence"), out="";
-  for(var k=0;k<CADENCE.length;k++){
-    var m=CADENCE[k], pct=Math.min(100,Math.round(m.elapsed/m.cycle*100)), over=m.elapsed>m.cycle;
-    var col=over?"#a4262c":(pct>75?"#8a5a00":"#0f7a4d");
-    var lbl=over?("day "+m.elapsed+" of a "+m.cycle+" day cycle, past due"):("day "+m.elapsed+" of "+m.cycle);
-    out+='<div class="meter"><div class="mh"><span><strong>'+m.n+"</strong></span><span>"+lbl+'</span></div><div class="bar"><i style="width:'+pct+"%;background:"+col+';"></i></div></div>';
-  }
-  c.innerHTML=out;
+  var cad = [
+    {name:"Restaurant walkthrough, guest perspective", every:14, day:21, note:"No walkthrough recorded since the cycle opened on 08-19."},
+    {name:"Equipment inspection", every:31, day:21, note:"Due by 09-19."},
+    {name:"Automatic par review", every:42, day:21, note:"Due by 09-30."},
+    {name:"Employee availabilities", every:31, day:null, note:"Not yet part of the daily checklist group."},
+    {name:"Next month's sales plan", every:null, day:null, note:"September on file. October due by 09-20."}
+  ];
+  var host=document.getElementById("cadence");
+  cad.forEach(function(c){
+    var w = document.createElement("div"); w.className="meter";
+    if(c.day===null || c.every===null){
+      w.innerHTML = "<div class='mh'><span>"+c.name+"</span><span class='pill p-na'>n/a</span></div><div class='note' style='margin:0;padding:0;border:0'>"+c.note+"</div>";
+    } else {
+      var over = c.day > c.every;
+      var w1 = Math.min(100, Math.round(c.day/c.every*100));
+      w.innerHTML = "<div class='mh'><span>"+c.name+"</span><span class='"+(over?"neg":"")+"'>day "+c.day+" of "+c.every+"</span></div>"+
+        "<div class='bar'><div class='fill"+(over?" over":"")+"' style='width:"+w1+"%'></div></div>"+
+        "<div class='note' style='margin:6px 0 0;padding:0;border:0'>"+c.note+"</div>";
+    }
+    host.appendChild(w);
+  });
+  if(weekStart){ /* week arrays reset each Monday and relabel to the new week */ }
 })();
 </script>
 </body>
