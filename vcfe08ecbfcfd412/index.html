@@ -79,6 +79,9 @@ font-size:11px;font-weight:800;letter-spacing:.04em}
 footer{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);
 font-size:12px;color:var(--muted);text-align:center;line-height:1.6}
 .two{display:grid;gap:13px;grid-template-columns:1fr 1fr}
+.two>div{min-width:0}
+.tiles>.tile{min-width:0}
+.cad>.cadi{min-width:0}
 @media(max-width:760px){.two{grid-template-columns:1fr}}
 </style>
 </head>
@@ -116,10 +119,10 @@ font-size:12px;color:var(--muted);text-align:center;line-height:1.6}
 
 <div class="tile">
 <div class="tlab">Prime cost, week Oct 19&ndash;25</div>
-<div class="tbig sm">48.03%</div>
+<div class="tbig sm">61.62%</div>
 <div class="trow"><span>Target</span><span class="neu">64.39%</span></div>
-<div class="trow"><span>Dollars</span><span class="neu">$13,252.56</span></div>
-<div class="note">Firms up once the month end count is entered. See the inventory item in flags.</div>
+<div class="trow"><span>Dollars</span><span class="pos">$16,999.54</span></div>
+<div class="note">Running 2.77 points under target, worth $766.73 to the good. This is the owner's number and it is in good shape.</div>
 </div>
 
 <div class="tile">
@@ -132,9 +135,9 @@ font-size:12px;color:var(--muted);text-align:center;line-height:1.6}
 
 <div class="tile">
 <div class="tlab">Open items</div>
-<div class="tbig sm" id="flagcount">9</div>
+<div class="tbig sm" id="flagcount">10</div>
 <div class="trow"><span>High</span><span class="neg">4</span></div>
-<div class="trow"><span>Medium</span><span style="color:var(--warn)">4</span></div>
+<div class="trow"><span>Medium</span><span style="color:var(--warn)">5</span></div>
 <div class="note">Highest value item first in the list below.</div>
 </div>
 </div>
@@ -170,7 +173,7 @@ font-size:12px;color:var(--muted);text-align:center;line-height:1.6}
 <div class="sev s-high">High</div>
 <div class="ftxt">
 <div class="ftitle">Beverage buying is running $2,117.96 above allotment for the month.</div>
-<div class="fbody">Against purchase allotment: draft beer at <b>31.19%</b> raw cost versus a <b>21%</b> target, non alcoholic beverage at <b>83.80%</b> versus <b>24%</b>, wine at <b>87.77%</b> versus <b>20%</b>, bottle beer at <b>27.63%</b> versus <b>24%</b> and liquor at <b>21.06%</b> versus <b>18%</b>. Draft alone is <b>$791.50</b> past allotment. Food is in good shape at <b>24.60%</b> against a <b>27%</b> target. The beverage orders are where the money is leaking.</div>
+<div class="fbody">Two separate systems now agree on this. Purchase allotment has draft beer at <b>31.19%</b> raw cost against a <b>21%</b> target and liquor at <b>21.06%</b> against <b>18%</b>; the week's cost of goods has draft at <b>33.14%</b> and liquor at <b>21.20%</b> against the same targets. Draft alone is <b>$791.50</b> past allotment for the month and <b>$375.35</b> over target for the week. Blended beverage is <b>$417.36</b> over for the week. Food is in good shape at <b>26.56%</b> against a <b>27%</b> target, so this is beverage specific: what is being ordered, and what is going into the glass.</div>
 </div>
 </div>
 
@@ -178,7 +181,7 @@ font-size:12px;color:var(--muted);text-align:center;line-height:1.6}
 <div class="sev s-med">Medium</div>
 <div class="ftxt">
 <div class="ftitle">Eleven new products need an inventory location before tomorrow's month end count.</div>
-<div class="fbody">Ten products were added October 27 and one October 29, including three draft kegs (PBC Cherry Dream 1/6, Michelob Amber Bock 1/6, Coors Banquet 1/2), Rochester Devil Dog cans, Ole Smoky Salty Caramel, Cargill kosher salt, roma tomatoes, jelly cups, Halloween variety candy, foil sheets and t-sacks. A product that is bought but not assigned to a location lands in cost and is never counted, so it reads as if it were all consumed. With the count due <b>October 31</b>, assigning these today is what keeps October's food and beverage cost honest. This is also the first thing to check whenever a cost line looks impossible.</div>
+<div class="fbody">Ten products were added October 27 and one October 29, including three draft kegs (PBC Cherry Dream 1/6, Michelob Amber Bock 1/6, Coors Banquet 1/2), Rochester Devil Dog cans, Ole Smoky Salty Caramel, Cargill kosher salt, roma tomatoes, jelly cups, Halloween variety candy, foil sheets and t-sacks. A product that is bought but not assigned to a location lands in cost and is never counted, so it reads as if it were all consumed. With the count due <b>October 31</b>, assigning these today is what keeps October's food and beverage cost honest. Two lines also need settling at that count: non alcoholic beverage came through at <b>-2.35%</b> of its sales and wine at <b>3.32%</b> against a <b>20%</b> target, while the purchase side shows wine at <b>87.77%</b>. Both point at stock that is on hand but not yet counted where it is used.</div>
 </div>
 </div>
 
@@ -195,6 +198,14 @@ font-size:12px;color:var(--muted);text-align:center;line-height:1.6}
 <div class="ftxt">
 <div class="ftitle">$300.00 of cash entertainment in two days, neither with a receipt number.</div>
 <div class="fbody">October 27 paid out <b>$150.00</b> for Bingo and October 28 paid out <b>$150.00</b> for Trivia, both coded to Music and Entertainment under store <b>V</b>. In both cases the receipt field holds a date (<b>10/28/26</b> on the second) rather than a receipt number. Entertainment, cleaning and bonuses paid in cash are the items that most often never make it into the records at all, so each one needs a real receipt number against it. Two in a row with the same gap makes this a habit rather than an oversight.</div>
+</div>
+</div>
+
+<div class="flag">
+<div class="sev s-med">Medium</div>
+<div class="ftxt">
+<div class="ftitle">Saturday October 24 gave away $880.34, more than four times a normal day.</div>
+<div class="fbody">That day carried <b>$453.73</b> of employee discounts and <b>$426.61</b> of guest discounts on <b>$6,305.47</b> of gross, which is <b>13.96%</b> of the day's sales against a daily average nearer <b>$197</b>. The same shift also ran <b>109.91</b> labor hours against <b>79.50</b> scheduled. A large booking would explain all of it, but nothing was recorded in the log for that night, so there is no record of what it was. The employee discount share is the part worth a direct answer.</div>
 </div>
 </div>
 
@@ -225,7 +236,7 @@ font-size:12px;color:var(--muted);text-align:center;line-height:1.6}
 <tbody id="bvr"></tbody>
 </table>
 </div>
-<div class="note">Read the beverage lines as a group rather than one at a time. Blended beverage cost came in at <strong>15.43%</strong> against a <strong>19.92%</strong> blended target, about <strong>$550.75</strong> favorable, while the individual category lines swing widely in both directions. That spread is what product landing in cost without landing in a counted inventory location looks like, together with some category allocation drift. The month end count and the location assignments above are what settle it.</div>
+<div class="note">Read the beverage lines as a group rather than one at a time. Blended beverage cost came in at <strong>23.32%</strong> against a <strong>19.92%</strong> blended target, about <strong>$417.36</strong> over, driven by draft at <strong>33.14%</strong> and liquor at <strong>21.20%</strong>. That matches what the purchase allotment system shows for the same categories, so the beverage overage is a buying and pouring question rather than a counting one. Food at <strong>26.56%</strong> against a <strong>27%</strong> target is where you want it. The non alcoholic and wine lines are the two still to settle at the count.</div>
 </div>
 
 <h2>Sales and labor, week of October 26</h2>
@@ -249,7 +260,7 @@ font-size:12px;color:var(--muted);text-align:center;line-height:1.6}
 <tbody id="cash"></tbody>
 </table>
 </div>
-<div class="note">A counted deposit that matches the posted figure is the proof. The posted figure on its own is not. Three of the last four days were counted correctly and none of them reached the bank the same day.</div>
+<div class="note">A counted deposit that matches the posted figure is the proof. The posted figure on its own is not. Three of the last four days were counted correctly and none of them reached the bank the same day. Across October the drawer is proving tightly: <strong>$104.32</strong> net over the whole month on <strong>$107,865.68</strong> of sales, which is under a tenth of a percent.</div>
 </div>
 </div>
 <div>
@@ -301,16 +312,16 @@ var WEEK = {
 
 var BVR = [
   ["Total gross sales", 27589.61, null, null, -4744.35],
-  ["Food cost", 1291.31, 8.43, 27.00, 2846.28],
-  ["Draft beer cost", -6.35, -0.21, 21.00, 655.40],
-  ["Bottle beer cost", 127.76, 6.71, 24.00, 329.35],
-  ["Liquor cost", 988.37, 14.91, 18.00, 204.99],
-  ["Non alcoholic cost", 773.05, 197.73, 24.00, -679.22],
+  ["Food cost", 4070.19, 26.56, 27.00, 67.40],
+  ["Draft beer cost", 1024.40, 33.14, 21.00, -375.35],
+  ["Bottle beer cost", 430.16, 22.59, 24.00, 26.95],
+  ["Liquor cost", 1405.57, 21.20, 18.00, -212.21],
+  ["Non alcoholic cost", -9.20, -2.35, 24.00, 103.03],
   ["Wine cost", 8.00, 3.32, 20.00, 40.23],
-  ["Total cost of goods", 3182.14, 11.53, 23.86, 3401.03],
+  ["Total cost of goods", 6929.12, 25.11, 23.86, -345.95],
   ["Hourly payroll", 5917.82, 21.45, 25.02, 985.11],
   ["Total payroll expense", 10070.42, 36.50, 40.53, 1112.68],
-  ["Prime cost", 13252.56, 48.03, 64.39, 4513.71],
+  ["Prime cost", 16999.54, 61.62, 64.39, 766.73],
   ["Waste values", 0.00, null, null, null]
 ];
 
@@ -332,6 +343,7 @@ var LAUNCH = [
   ["New products given a location", "flag", "FLAG"],
   ["Waste sheets valued", "flag", "FLAG"],
   ["Budget variance received", "ok", "OK"],
+  ["Cost of goods reconciled", "ok", "OK"],
   ["Hourly payroll reporting", "ok", "OK"]
 ];
 
